@@ -38,6 +38,8 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
+        // Preserva la direttiva "use client" in cima al bundle
+        banner: '"use client";',
       },
     },
   },
