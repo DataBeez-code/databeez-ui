@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Design Tokens (Light Mode) ───────────────────── */
+  :root {
+    /* Backgrounds */
+    --color-bg-base: 249 250 251;        /* gray-50 */
+    --color-bg-surface: 255 255 255;     /* white */
+    --color-bg-subtle: 243 244 246;      /* gray-100 */
+    --color-bg-muted: 229 231 235;       /* gray-200 */
+
+    /* Borders */
+    --color-border: 229 231 235;         /* gray-200 */
+    --color-border-strong: 156 163 175;  /* gray-400 */
+
+    /* Text */
+    --color-text-base: 17 24 39;         /* gray-900 */
+    --color-text-muted: 107 114 128;     /* gray-500 */
+    --color-text-subtle: 156 163 175;    /* gray-400 */
+
+    /* Brand (Amber) */
+    --color-primary: 245 158 11;         /* amber-500 */
+    --color-primary-hover: 217 119 6;    /* amber-600 */
+    --color-primary-light: 254 243 199;  /* amber-100 */
+
+    /* Semantic */
+    --color-success: 16 185 129;         /* emerald-500 */
+    --color-success-light: 236 253 245;  /* emerald-50 */
+    --color-warning: 245 158 11;         /* amber-500 */
+    --color-warning-light: 255 251 235;  /* amber-50 */
+    --color-error: 239 68 68;            /* red-500 */
+    --color-error-light: 254 242 242;    /* red-50 */
+    --color-info: 59 130 246;            /* blue-500 */
+    --color-info-light: 239 246 255;     /* blue-50 */
+  }
+
+  /* ── Dark Mode Tokens ─────────────────────────────── */
+  .dark {
+    --color-bg-base: 17 24 39;           /* gray-900 */
+    --color-bg-surface: 31 41 55;        /* gray-800 */
+    --color-bg-subtle: 55 65 81;         /* gray-700 */
+    --color-bg-muted: 75 85 99;          /* gray-600 */
+
+    --color-border: 55 65 81;            /* gray-700 */
+    --color-border-strong: 107 114 128;  /* gray-500 */
+
+    --color-text-base: 249 250 251;      /* gray-50 */
+    --color-text-muted: 156 163 175;     /* gray-400 */
+    --color-text-subtle: 107 114 128;    /* gray-500 */
+
+    --color-primary: 251 191 36;         /* amber-400 */
+    --color-primary-hover: 245 158 11;   /* amber-500 */
+    --color-primary-light: 120 53 15;    /* amber-900 */
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg-base));
+    color: rgb(var(--color-text-base));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold;
+  }
+}
+
+@layer components {
+  .btn-databeez {
+    @apply font-medium px-6 py-3 rounded-xl duration-200 transition-colors transition-shadow;
+  }
+
+  .btn-databeez-primary {
+    @apply btn-databeez bg-primary-500 hover:bg-primary-600 text-white shadow-databeez hover:shadow-databeez-lg;
+  }
+
+  .btn-databeez-secondary {
+    @apply btn-databeez bg-surface border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white;
+  }
+
+  .btn-databeez-accent {
+    @apply btn-databeez bg-databeez-accent hover:bg-primary-700 text-white shadow-lg hover:shadow-xl;
+  }
+
+  .card-databeez {
+    @apply bg-surface rounded-2xl shadow-lg duration-300 border border-border transition-[box-shadow,border-color,transform];
+  }
+
+  .card-databeez-hover {
+    @apply card-databeez hover:border-databeez-primary hover:-translate-y-1;
+  }
+
+  .input-databeez {
+    @apply w-full px-4 py-3 border border-border bg-surface rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors;
+  }
+
+  .badge-databeez {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-databeez-primary {
+    @apply badge-databeez bg-primary-100 text-primary-500;
+  }
+
+  .badge-databeez-success {
+    @apply badge-databeez bg-green-100 text-databeez-success;
+  }
+
+  .bg-databeez-gradient {
+    @apply bg-gradient-to-br from-primary-500 to-databeez-accent;
+  }
+
+  .bg-databeez-gradient-light {
+    @apply bg-gradient-to-br from-primary-50 to-primary-100;
+  }
+
+  .bg-databeez-gradient-dark {
+    @apply bg-gradient-to-br from-databeez-dark to-gray-700;
+  }
+}
+
+@layer utilities {
+  .text-databeez-gradient {
+    @apply bg-gradient-to-br from-primary-500 to-databeez-accent bg-clip-text text-transparent;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
