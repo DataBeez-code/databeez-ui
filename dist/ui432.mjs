@@ -1,0 +1,74 @@
+import S from "./ui357.mjs";
+_.displayName = "markup-templating";
+_.aliases = [];
+function _(g) {
+  g.register(S), function(e) {
+    function s(a, r) {
+      return "___" + a.toUpperCase() + r + "___";
+    }
+    Object.defineProperties(e.languages["markup-templating"] = {}, {
+      buildPlaceholders: {
+        /**
+         * Tokenize all inline templating expressions matching `placeholderPattern`.
+         *
+         * If `replaceFilter` is provided, only matches of `placeholderPattern` for which `replaceFilter` returns
+         * `true` will be replaced.
+         *
+         * @param {object} env The environment of the `before-tokenize` hook.
+         * @param {string} language The language id.
+         * @param {RegExp} placeholderPattern The matches of this pattern will be replaced by placeholders.
+         * @param {(match: string) => boolean} [replaceFilter]
+         */
+        value: function(a, r, f, p) {
+          if (a.language === r) {
+            var u = a.tokenStack = [];
+            a.code = a.code.replace(f, function(n) {
+              if (typeof p == "function" && !p(n))
+                return n;
+              for (var i = u.length, t; a.code.indexOf(t = s(r, i)) !== -1; )
+                ++i;
+              return u[i] = n, t;
+            }), a.grammar = e.languages.markup;
+          }
+        }
+      },
+      tokenizePlaceholders: {
+        /**
+         * Replace placeholders with proper tokens after tokenizing.
+         *
+         * @param {object} env The environment of the `after-tokenize` hook.
+         * @param {string} language The language id.
+         */
+        value: function(a, r) {
+          if (a.language !== r || !a.tokenStack)
+            return;
+          a.grammar = e.languages[r];
+          var f = 0, p = Object.keys(a.tokenStack);
+          function u(n) {
+            for (var i = 0; i < n.length && !(f >= p.length); i++) {
+              var t = n[i];
+              if (typeof t == "string" || t.content && typeof t.content == "string") {
+                var y = p[f], d = a.tokenStack[y], c = typeof t == "string" ? t : t.content, k = s(r, y), l = c.indexOf(k);
+                if (l > -1) {
+                  ++f;
+                  var h = c.substring(0, l), b = new e.Token(
+                    r,
+                    e.tokenize(d, a.grammar),
+                    "language-" + r,
+                    d
+                  ), v = c.substring(l + k.length), o = [];
+                  h && o.push.apply(o, u([h])), o.push(b), v && o.push.apply(o, u([v])), typeof t == "string" ? n.splice.apply(n, [i, 1].concat(o)) : t.content = o;
+                }
+              } else t.content && u(t.content);
+            }
+            return n;
+          }
+          u(a.tokens);
+        }
+      }
+    });
+  }(g);
+}
+export {
+  _ as default
+};

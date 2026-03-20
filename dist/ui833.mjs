@@ -1,0 +1,27 @@
+import { getDefaultExportFromCjs as s } from "./ui153.mjs";
+import { __require as i } from "./ui335.mjs";
+function u(r, a) {
+  for (var o = 0; o < a.length; o++) {
+    const e = a[o];
+    if (typeof e != "string" && !Array.isArray(e)) {
+      for (const t in e)
+        if (t !== "default" && !(t in r)) {
+          const n = Object.getOwnPropertyDescriptor(e, t);
+          n && Object.defineProperty(r, t, n.get ? n : {
+            enumerable: !0,
+            get: () => e[t]
+          });
+        }
+    }
+  }
+  return Object.freeze(Object.defineProperty(r, Symbol.toStringTag, { value: "Module" }));
+}
+var f = i();
+const c = /* @__PURE__ */ s(f), b = /* @__PURE__ */ u({
+  __proto__: null,
+  default: c
+}, [f]);
+export {
+  c as default,
+  b as v
+};

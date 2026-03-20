@@ -2,10 +2,29 @@
 
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 import { cn } from "@/lib/utils"
+
+// Lazy load per evitare che react-syntax-highlighter acceda a `document`
+// durante SSR (esegue document.createElement al momento dell'import)
+const LazySyntaxHighlighter = React.lazy(async () => {
+  const [{ Prism }, { oneDark }] = await Promise.all([
+    import("react-syntax-highlighter"),
+    import("react-syntax-highlighter/dist/esm/styles/prism"),
+  ])
+  return {
+    default: ({ children, language }: { children: string; language: string }) => (
+      <Prism
+        language={language}
+        style={oneDark}
+        customStyle={{ margin: 0, borderRadius: 0, fontSize: "0.875rem", lineHeight: "1.6" }}
+        showLineNumbers={false}
+      >
+        {children}
+      </Prism>
+    ),
+  }
+})
 
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   code: string
@@ -59,19 +78,13 @@ function CodeBlock({
         )}
       </div>
 
-      <SyntaxHighlighter
-        language={language}
-        style={oneDark}
-        customStyle={{
-          margin: 0,
-          borderRadius: 0,
-          fontSize: "0.875rem",
-          lineHeight: "1.6",
-        }}
-        showLineNumbers={false}
-      >
-        {code}
-      </SyntaxHighlighter>
+      <React.Suspense fallback={
+        <pre className="m-0 p-4 bg-[#282c34] text-gray-300 text-sm font-mono overflow-x-auto">
+          {code}
+        </pre>
+      }>
+        <LazySyntaxHighlighter language={language}>{code}</LazySyntaxHighlighter>
+      </React.Suspense>
     </div>
   )
 }

@@ -1,0 +1,246 @@
+var a, c;
+function u() {
+  if (c) return a;
+  c = 1;
+  function g(e) {
+    const i = "[a-zA-Z_][a-zA-Z0-9_.]*(!|\\?)?", E = "[a-zA-Z_]\\w*[!?=]?|[-+~]@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?", s = {
+      $pattern: i,
+      keyword: "and false then defined module in return redo retry end for true self when next until do begin unless nil break not case cond alias while ensure or include use alias fn quote require import with|0"
+    }, n = {
+      className: "subst",
+      begin: /#\{/,
+      end: /\}/,
+      keywords: s
+    }, r = {
+      className: "number",
+      begin: "(\\b0o[0-7_]+)|(\\b0b[01_]+)|(\\b0x[0-9a-fA-F_]+)|(-?\\b[1-9][0-9_]*(\\.[0-9_]+([eE][-+]?[0-9]+)?)?)",
+      relevance: 0
+    }, t = `[/|([{<"']`, l = {
+      className: "string",
+      begin: "~[a-z](?=" + t + ")",
+      contains: [
+        {
+          endsParent: !0,
+          contains: [
+            {
+              contains: [
+                e.BACKSLASH_ESCAPE,
+                n
+              ],
+              variants: [
+                {
+                  begin: /"/,
+                  end: /"/
+                },
+                {
+                  begin: /'/,
+                  end: /'/
+                },
+                {
+                  begin: /\//,
+                  end: /\//
+                },
+                {
+                  begin: /\|/,
+                  end: /\|/
+                },
+                {
+                  begin: /\(/,
+                  end: /\)/
+                },
+                {
+                  begin: /\[/,
+                  end: /\]/
+                },
+                {
+                  begin: /\{/,
+                  end: /\}/
+                },
+                {
+                  begin: /</,
+                  end: />/
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }, _ = {
+      className: "string",
+      begin: "~[A-Z](?=" + t + ")",
+      contains: [
+        {
+          begin: /"/,
+          end: /"/
+        },
+        {
+          begin: /'/,
+          end: /'/
+        },
+        {
+          begin: /\//,
+          end: /\//
+        },
+        {
+          begin: /\|/,
+          end: /\|/
+        },
+        {
+          begin: /\(/,
+          end: /\)/
+        },
+        {
+          begin: /\[/,
+          end: /\]/
+        },
+        {
+          begin: /\{/,
+          end: /\}/
+        },
+        {
+          begin: /</,
+          end: />/
+        }
+      ]
+    }, d = {
+      className: "string",
+      contains: [
+        e.BACKSLASH_ESCAPE,
+        n
+      ],
+      variants: [
+        {
+          begin: /"""/,
+          end: /"""/
+        },
+        {
+          begin: /'''/,
+          end: /'''/
+        },
+        {
+          begin: /~S"""/,
+          end: /"""/,
+          contains: []
+          // override default
+        },
+        {
+          begin: /~S"/,
+          end: /"/,
+          contains: []
+          // override default
+        },
+        {
+          begin: /~S'''/,
+          end: /'''/,
+          contains: []
+          // override default
+        },
+        {
+          begin: /~S'/,
+          end: /'/,
+          contains: []
+          // override default
+        },
+        {
+          begin: /'/,
+          end: /'/
+        },
+        {
+          begin: /"/,
+          end: /"/
+        }
+      ]
+    }, b = {
+      className: "function",
+      beginKeywords: "def defp defmacro",
+      end: /\B\b/,
+      // the mode is ended by the title
+      contains: [
+        e.inherit(e.TITLE_MODE, {
+          begin: i,
+          endsParent: !0
+        })
+      ]
+    }, S = e.inherit(b, {
+      className: "class",
+      beginKeywords: "defimpl defmodule defprotocol defrecord",
+      end: /\bdo\b|$|;/
+    }), o = [
+      d,
+      _,
+      l,
+      e.HASH_COMMENT_MODE,
+      S,
+      b,
+      {
+        begin: "::"
+      },
+      {
+        className: "symbol",
+        begin: ":(?![\\s:])",
+        contains: [
+          d,
+          {
+            begin: E
+          }
+        ],
+        relevance: 0
+      },
+      {
+        className: "symbol",
+        begin: i + ":(?!:)",
+        relevance: 0
+      },
+      r,
+      {
+        className: "variable",
+        begin: "(\\$\\W)|((\\$|@@?)(\\w+))"
+      },
+      {
+        begin: "->"
+      },
+      {
+        // regexp container
+        begin: "(" + e.RE_STARTERS_RE + ")\\s*",
+        contains: [
+          e.HASH_COMMENT_MODE,
+          {
+            // to prevent false regex triggers for the division function:
+            // /:
+            begin: /\/: (?=\d+\s*[,\]])/,
+            relevance: 0,
+            contains: [r]
+          },
+          {
+            className: "regexp",
+            illegal: "\\n",
+            contains: [
+              e.BACKSLASH_ESCAPE,
+              n
+            ],
+            variants: [
+              {
+                begin: "/",
+                end: "/[a-z]*"
+              },
+              {
+                begin: "%r\\[",
+                end: "\\][a-z]*"
+              }
+            ]
+          }
+        ],
+        relevance: 0
+      }
+    ];
+    return n.contains = o, {
+      name: "Elixir",
+      keywords: s,
+      contains: o
+    };
+  }
+  return a = g, a;
+}
+export {
+  u as __require
+};
