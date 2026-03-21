@@ -38,8 +38,12 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
-        // Preserva la direttiva "use client" in cima al bundle
-        banner: '"use client";',
+        banner: (chunk) => {
+          // Add "use client" so Next.js/Turbopack treats every chunk
+          // as a client boundary and skips SSR evaluation of browser APIs.
+          if (chunk.name === "index") return '"use client";\n'
+          return ""
+        },
       },
     },
   },

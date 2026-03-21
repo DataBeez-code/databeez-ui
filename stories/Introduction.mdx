@@ -73,8 +73,19 @@ usa il `file:` path per avere hot-reload immediato senza pubblicare:
 }
 ```
 
-Esegui `npm install` nel progetto consumatore: npm crea un symlink a questa cartella
-e qualsiasi modifica ai componenti è visibile immediatamente.
+Esegui `npm install` nel progetto consumatore: npm crea un symlink a questa cartella.
+
+> **Importante (Next.js):** aggiungi `transpilePackages: ['@databeez/ui']` nel `next.config.js`
+> del progetto consumatore. Senza questa opzione Next.js cerca i file compilati in `dist/`
+> invece di usare i sorgenti TypeScript direttamente — e le modifiche non sono visibili senza
+> un `npm run build` preventivo in `databeez-ui`.
+>
+> ```js
+> // next.config.js
+> const nextConfig = {
+>   transpilePackages: ['@databeez/ui'],
+> }
+> ```
 
 > **Attenzione:** con `file:` path le dipendenze di `@databeez/ui` non vengono hoisate
 > automaticamente. Se il progetto consumatore usa direttamente un pacchetto già presente
@@ -84,15 +95,31 @@ e qualsiasi modifica ai componenti è visibile immediatamente.
 
 ## Integrazione in un progetto Next.js
 
-```tsx
-// 1. Importa i token CSS nel layout root
-import "@databeez/ui/globals.css"
+```js
+// 1. next.config.js — abilita la compilazione dei sorgenti TypeScript del pacchetto
+const nextConfig = {
+  transpilePackages: ['@databeez/ui'],
+}
+module.exports = nextConfig
+```
 
+```js
 // 2. Estendi tailwind.config.js
 const databeezeConfig = require("@databeez/ui/tailwind.config")
-module.exports = { presets: [databeezeConfig], content: ["..."] }
+module.exports = {
+  presets: [databeezeConfig],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@databeez/ui/src/**/*.{js,ts,jsx,tsx}",
+  ],
+}
+```
 
-// 3. Usa i componenti
+```tsx
+// 3. Importa i token CSS nel layout root
+import "@databeez/ui/globals.css"
+
+// 4. Usa i componenti
 import { Button, Card, StatusBadge } from "@databeez/ui"
 ```
 
