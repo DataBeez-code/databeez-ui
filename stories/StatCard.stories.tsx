@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Users, Key, Activity, TrendingUp } from "lucide-react"
 import { StatCard } from "@/components/stat-card"
 

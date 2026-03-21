@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { StatusIndicatorRow } from "@/components/status-indicator-row"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/card"
 

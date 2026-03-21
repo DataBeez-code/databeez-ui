@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/blocks"
+import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="Introduction" />
 
@@ -16,14 +16,22 @@ Questa libreria raccoglie tutti i componenti React, i token di design e le utili
 
 ## Stack tecnologico
 
-| Layer | Tecnologia |
-|---|---|
-| Framework | React 18 |
-| Stili | Tailwind CSS 3 + CSS Variables |
-| Varianti | Class Variance Authority (CVA) |
-| Primitivi accessibili | Radix UI (Dialog, Select, Tabs) |
-| Icone | Lucide React |
-| Evidenziazione codice | react-syntax-highlighter |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "left", padding: "0.5rem 1rem", borderBottom: "2px solid #e5e7eb" }}>Layer</th>
+      <th style={{ textAlign: "left", padding: "0.5rem 1rem", borderBottom: "2px solid #e5e7eb" }}>Tecnologia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Framework</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>React 18</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Stili</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Tailwind CSS 3 + CSS Variables</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Varianti</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Class Variance Authority (CVA)</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Primitivi accessibili</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Radix UI (Dialog, Select, Tabs)</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Icone</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Lucide React</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem" }}>Evidenziazione codice</td><td style={{ padding: "0.5rem 1rem" }}>react-syntax-highlighter</td></tr>
+  </tbody>
+</table>
 
 ---
 
@@ -145,10 +153,12 @@ export default function RootLayout({ children }) {
 
 ---
 
-| | |
-|---|---|
-| Versione | `0.1.0` |
-| Repository | `databeez-ui` (standalone, condiviso tra tutti i frontend) |
-| Maintainer | Team DataBeez |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <tbody>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb", fontWeight: 600 }}>Versione</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}><code>0.1.0</code></td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb", fontWeight: 600 }}>Repository</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}><code>databeez-ui</code> (standalone, condiviso tra tutti i frontend)</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", fontWeight: 600 }}>Maintainer</td><td style={{ padding: "0.5rem 1rem" }}>Team DataBeez</td></tr>
+  </tbody>
+</table>
 
 </div>

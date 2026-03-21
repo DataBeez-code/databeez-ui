@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Zap, Shield, Globe } from "lucide-react"
 import { FeatureCard } from "@/components/feature-card"
 import { Button } from "@/components/button"

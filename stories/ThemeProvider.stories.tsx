@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Sun, Moon, Monitor } from "lucide-react"
 import { ThemeProvider, useTheme, THEME_ANTI_FOUC_SCRIPT, THEME_STORAGE_KEY } from "@/components/theme-provider"
 import { Button } from "@/components/button"

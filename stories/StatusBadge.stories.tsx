@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { StatusBadge } from "@/components/status-badge"
 
 const meta: Meta<typeof StatusBadge> = {
