@@ -1,0 +1,25 @@
+import { g as f, U as c } from "./index-CqL3bFoY.mjs";
+function i(t, s) {
+  for (var o = 0; o < s.length; o++) {
+    const e = s[o];
+    if (typeof e != "string" && !Array.isArray(e)) {
+      for (const r in e)
+        if (r !== "default" && !(r in t)) {
+          const n = Object.getOwnPropertyDescriptor(e, r);
+          n && Object.defineProperty(t, r, n.get ? n : {
+            enumerable: !0,
+            get: () => e[r]
+          });
+        }
+    }
+  }
+  return Object.freeze(Object.defineProperty(t, Symbol.toStringTag, { value: "Module" }));
+}
+var a = c();
+const p = /* @__PURE__ */ f(a), d = /* @__PURE__ */ i({
+  __proto__: null,
+  default: p
+}, [a]);
+export {
+  d
+};
