@@ -20,8 +20,13 @@
     "globals.css",
     "tailwind.config.js"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Databeez-code/databeez-ui.git"
+  },
   "scripts": {
     "build": "vite build",
+    "prepare": "vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
