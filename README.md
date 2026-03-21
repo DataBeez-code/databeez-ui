@@ -1,4 +1,4 @@
-# @databeez/ui
+# @databeez-code/ui
 
 Design system ufficiale di **DataBeez.ai** — componenti React condivisi tra tutti i progetti frontend del team.
 
@@ -8,35 +8,39 @@ Costruito con **Tailwind CSS**, **Radix UI** e **TypeScript**. Documentazione in
 
 ## Installazione
 
-### Produzione (GitHub Packages)
+### Produzione (git dependency)
+
+Aggiungi nel `package.json` del progetto consumatore:
+
+```json
+{
+  "dependencies": {
+    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.1.0"
+  }
+}
+```
 
 ```bash
-npm install @databeez/ui
+npm install
 ```
 
-Aggiungi al `.npmrc` del progetto le credenziali per il registry GitHub:
-
-```
-@databeez:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
-```
+Nessun token o `.npmrc` necessario — il repo è pubblico. Per aggiornare a una nuova versione, cambia il tag (`#v0.1.1`, ecc.).
 
 ### Sviluppo locale (due repo in parallelo)
 
-Se stai modificando i componenti in contemporanea con un progetto consumatore, usa il `file:` path per avere hot-reload immediato senza pubblicare:
+Se stai modificando i componenti in contemporanea con un progetto consumatore, usa il `file:` path per avere hot-reload immediato:
 
 ```json
-// package.json del progetto consumatore
 {
   "dependencies": {
-    "@databeez/ui": "file:../databeez-ui"
+    "@databeez-code/ui": "file:../databeez-ui"
   }
 }
 ```
 
 Esegui `npm install` nel progetto consumatore: npm crea un symlink a questa cartella e qualsiasi modifica ai componenti è visibile immediatamente.
 
-> **Attenzione:** con `file:` path le dipendenze di `@databeez/ui` non vengono hoisate automaticamente. Se il progetto consumatore usa direttamente un pacchetto già presente qui (es. `react-syntax-highlighter`, `lucide-react`), dichiaralo anche nel suo `package.json`.
+> **Attenzione:** con `file:` path le dipendenze di `@databeez-code/ui` non vengono hoisate automaticamente. Se il progetto consumatore usa direttamente un pacchetto già presente qui (es. `react-syntax-highlighter`, `lucide-react`), dichiaralo anche nel suo `package.json`.
 
 ---
 
@@ -44,27 +48,27 @@ Esegui `npm install` nel progetto consumatore: npm crea un symlink a questa cart
 
 ```tsx
 // 1. Importa i token CSS nel layout root
-import '@databeez/ui/globals.css'
+import '@databeez-code/ui/globals.css'
 
 // 2. Estendi tailwind.config.js
-const databeezeConfig = require('@databeez/ui/tailwind.config')
+const databeezeConfig = require('@databeez-code/ui/tailwind.config')
 module.exports = {
   presets: [databeezeConfig],
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@databeez/ui/src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@databeez-code/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
 }
 
 // 3. Usa i componenti
-import { Button, Card, StatusBadge } from '@databeez/ui'
+import { Button, Card, StatusBadge } from '@databeez-code/ui'
 ```
 
 ### Dark mode (anti-FOUC)
 
 ```tsx
 // app/layout.tsx
-import { THEME_ANTI_FOUC_SCRIPT, ThemeProvider } from '@databeez/ui'
+import { THEME_ANTI_FOUC_SCRIPT, ThemeProvider } from '@databeez-code/ui'
 
 export default function RootLayout({ children }) {
   return (
