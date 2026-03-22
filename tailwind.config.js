@@ -73,6 +73,11 @@ module.exports = {
         'databeez-light': colors.gray[50],
         'databeez-success': '#10b981',
 
+        // Category colors
+        'category-top': colors.amber[500],
+        'category-base': colors.blue[500],
+        'category-vertical': colors.emerald[500],
+
         // Semantic status colors
         success: {
           50: '#ecfdf5',
