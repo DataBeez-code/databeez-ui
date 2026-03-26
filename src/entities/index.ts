@@ -1,10 +1,11 @@
 import {
   Building2,
-  Briefcase,
+  Store,
   Landmark,
   Globe,
   Receipt,
   HelpCircle,
+  Briefcase,
   User,
   MapPin,
   type LucideIcon,
@@ -31,6 +32,22 @@ export function getSubjectMeta(tipoSoggetto: string | undefined): SubjectMeta {
 }
 
 // ---------------------------------------------------------------------------
+// Sottotipi persona
+// ---------------------------------------------------------------------------
+
+export interface PersonMeta {
+  label: string
+  icon: LucideIcon
+}
+
+export function getPersonMeta(subType: string | undefined): PersonMeta {
+  switch (subType) {
+    case 'F': return { label: 'Professionista', icon: Briefcase }
+    default:  return { label: 'Persona',         icon: User  }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Tipi organizzazione (S, D, E, X, P, A)
 // ---------------------------------------------------------------------------
 
@@ -43,7 +60,7 @@ export interface OrgMeta {
 
 export const ORG_TYPE_META: Record<OrgType, OrgMeta> = {
   S: { label: 'Società',           icon: Building2  },
-  D: { label: 'Ditta individuale', icon: Briefcase  },
+  D: { label: 'Ditta individuale', icon: Store      },
   E: { label: 'Ente pubblico',     icon: Landmark   },
   X: { label: 'Estera',            icon: Globe      },
   P: { label: 'PIVA',              icon: Receipt    },
