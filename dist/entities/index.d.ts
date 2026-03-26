@@ -6,6 +6,11 @@ export interface SubjectMeta {
 }
 export declare const SUBJECT_TYPE_META: Record<SubjectType, SubjectMeta>;
 export declare function getSubjectMeta(tipoSoggetto: string | undefined): SubjectMeta;
+export interface PersonMeta {
+    label: string;
+    icon: LucideIcon;
+}
+export declare function getPersonMeta(subType: string | undefined): PersonMeta;
 export type OrgType = 'S' | 'D' | 'E' | 'X' | 'P' | 'A';
 export interface OrgMeta {
     label: string;
