@@ -8,6 +8,7 @@ import {
   Briefcase,
   User,
   MapPin,
+  Warehouse,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -80,4 +81,13 @@ export function getOrgMeta(tipoOrg: string | undefined): OrgMeta {
 export const ADDRESS_META = {
   label: 'Indirizzo',
   icon: MapPin,
+} as const
+
+// ---------------------------------------------------------------------------
+// Entità localizzazione (sede registrata al Registro Imprese)
+// ---------------------------------------------------------------------------
+
+export const LOCATION_META = {
+  label: 'Sede',
+  icon: Warehouse,
 } as const

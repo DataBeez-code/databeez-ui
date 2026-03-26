@@ -22,3 +22,7 @@ export declare const ADDRESS_META: {
     readonly label: "Indirizzo";
     readonly icon: LucideIcon;
 };
+export declare const LOCATION_META: {
+    readonly label: "Sede";
+    readonly icon: LucideIcon;
+};
