@@ -31,3 +31,4 @@ export * from './components/textarea';
 export * from './components/theme-provider';
 export * from './hooks/useAsyncData';
 export * from './lib/utils';
+export * from './entities';
