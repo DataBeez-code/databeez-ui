@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react';
-export type SubjectType = 'A' | 'P';
+export type SubjectType = 'O' | 'P';
 export interface SubjectMeta {
     label: string;
     icon: LucideIcon;

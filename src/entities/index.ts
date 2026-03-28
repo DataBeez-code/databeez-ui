@@ -16,7 +16,7 @@ import {
 // Tipi soggetto (A = Organizzazione, P = Persona)
 // ---------------------------------------------------------------------------
 
-export type SubjectType = 'A' | 'P'
+export type SubjectType = 'O' | 'P'
 
 export interface SubjectMeta {
   label: string
@@ -25,7 +25,7 @@ export interface SubjectMeta {
 
 export const SUBJECT_TYPE_META: Record<SubjectType, SubjectMeta> = {
   A: { label: 'Organizzazione', icon: Building2 },
-  P: { label: 'Persona',        icon: User },
+  P: { label: 'Persona', icon: User },
 }
 
 export function getSubjectMeta(tipoSoggetto: string | undefined): SubjectMeta {
@@ -44,7 +44,7 @@ export interface PersonMeta {
 export function getPersonMeta(subType: string | undefined): PersonMeta {
   switch (subType) {
     case 'F': return { label: 'Professionista', icon: Briefcase }
-    default:  return { label: 'Persona',         icon: User  }
+    default: return { label: 'Persona', icon: User }
   }
 }
 
@@ -60,12 +60,12 @@ export interface OrgMeta {
 }
 
 export const ORG_TYPE_META: Record<OrgType, OrgMeta> = {
-  S: { label: 'Società',           icon: Building2  },
-  D: { label: 'Ditta individuale', icon: Store      },
-  E: { label: 'Ente pubblico',     icon: Landmark   },
-  X: { label: 'Estera',            icon: Globe      },
-  P: { label: 'PIVA',              icon: Receipt    },
-  A: { label: 'Altro',             icon: HelpCircle },
+  S: { label: 'Società', icon: Building2 },
+  D: { label: 'Ditta individuale', icon: Store },
+  E: { label: 'Ente pubblico', icon: Landmark },
+  X: { label: 'Estera', icon: Globe },
+  P: { label: 'PIVA', icon: Receipt },
+  A: { label: 'Altro', icon: HelpCircle },
 }
 
 const ORG_TYPE_FALLBACK: OrgMeta = { label: 'Organizzazione', icon: Building2 }
