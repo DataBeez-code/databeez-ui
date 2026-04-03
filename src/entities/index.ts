@@ -24,12 +24,12 @@ export interface SubjectMeta {
 }
 
 export const SUBJECT_TYPE_META: Record<SubjectType, SubjectMeta> = {
-  A: { label: 'Organizzazione', icon: Building2 },
+  O: { label: 'Organizzazione', icon: Building2 },
   P: { label: 'Persona', icon: User },
 }
 
 export function getSubjectMeta(tipoSoggetto: string | undefined): SubjectMeta {
-  return SUBJECT_TYPE_META[(tipoSoggetto as SubjectType) ?? ''] ?? SUBJECT_TYPE_META.A
+  return SUBJECT_TYPE_META[(tipoSoggetto as SubjectType) ?? ''] ?? SUBJECT_TYPE_META.O
 }
 
 // ---------------------------------------------------------------------------

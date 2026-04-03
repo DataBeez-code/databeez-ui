@@ -1,3 +1,4 @@
+import { useState } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Mail, Lock, Search } from "lucide-react"
 import { Input } from "@/components/input"
@@ -50,8 +51,6 @@ export const WithIconLeft: StoryObj<typeof InputWithIcon> = {
 export const SearchInputStory: StoryObj<typeof SearchInput> = {
   name: "SearchInput",
   render: () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { useState } = require("react")
     const [value, setValue] = useState("")
     return (
       <div className="max-w-sm p-4">
