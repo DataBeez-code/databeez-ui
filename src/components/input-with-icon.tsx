@@ -26,7 +26,8 @@ const InputWithIcon = React.forwardRef<HTMLInputElement, InputWithIconProps>(
     },
     ref
   ) => {
-    const inputId = id ?? `input-icon-${Math.random().toString(36).slice(2, 9)}`
+    const reactId = React.useId()
+    const inputId = id ?? reactId
 
     return (
       <div className="space-y-1">

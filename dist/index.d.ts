@@ -6,6 +6,7 @@ export * from './components/card';
 export * from './components/chat-input';
 export * from './components/code-block';
 export * from './components/copy-button';
+export * from './components/databeez-logo';
 export * from './components/dialog';
 export * from './components/empty-state';
 export * from './components/markdown-content';
