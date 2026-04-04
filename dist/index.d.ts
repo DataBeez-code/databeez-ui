@@ -1,4 +1,5 @@
 export * from './components/alert';
+export * from './components/app-logos';
 export * from './components/detail-list';
 export * from './components/badge';
 export * from './components/button';
@@ -27,6 +28,7 @@ export * from './components/select';
 export * from './components/side-panel';
 export * from './components/skeleton';
 export * from './components/spinner';
+export * from './components/switch';
 export * from './components/stat-card';
 export * from './components/status-badge';
 export * from './components/status-indicator-row';

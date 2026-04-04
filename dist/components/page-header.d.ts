@@ -1,6 +1,6 @@
 import * as React from "react";
 export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-    title: string;
+    title: React.ReactNode;
     description?: string;
     actions?: React.ReactNode;
     breadcrumb?: React.ReactNode;
