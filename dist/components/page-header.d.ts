@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PageHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
     title: React.ReactNode;
     description?: string;
     actions?: React.ReactNode;
