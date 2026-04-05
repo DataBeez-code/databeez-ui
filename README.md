@@ -15,7 +15,7 @@ Aggiungi nel `package.json` del progetto consumatore:
 ```json
 {
   "dependencies": {
-    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.1.0"
+    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.4.1"
   }
 }
 ```
@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
 |-----------|-----------|
 | **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select` |
 | **Display** | `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `Spinner` |
-| **Layout** | `Card`, `PageHeader`, `TabSwitch`, `Tabs` |
+| **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs` |
 | **Feedback** | `Alert`, `EmptyState`, `Skeleton` |
 | **Content** | `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` |
 | **System** | `Table`, `Dialog`, `StatusIndicatorRow`, `ThemeProvider` |
