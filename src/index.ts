@@ -40,6 +40,8 @@ export * from './components/tabs'
 export * from './components/textarea'
 export * from './components/time-picker'
 export * from './components/theme-provider'
+export * from './components/theme-switcher'
+export * from './components/user-menu'
 
 // Hooks
 export * from './hooks/useAsyncData'
