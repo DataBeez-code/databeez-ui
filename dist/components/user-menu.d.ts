@@ -13,5 +13,6 @@ export interface UserMenuProps {
     bumblebeeUrl: string;
     extraItems?: UserMenuItem[];
     onLogout?: () => void;
+    showLaunchpadLink?: boolean;
 }
-export declare function UserMenu({ user, bumblebeeUrl, extraItems, onLogout }: UserMenuProps): import("react/jsx-runtime").JSX.Element;
+export declare function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchpadLink }: UserMenuProps): import("react/jsx-runtime").JSX.Element;

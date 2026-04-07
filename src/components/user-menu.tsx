@@ -19,9 +19,10 @@ export interface UserMenuProps {
   bumblebeeUrl: string
   extraItems?: UserMenuItem[]
   onLogout?: () => void
+  showLaunchpadLink?: boolean
 }
 
-export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout }: UserMenuProps) {
+export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchpadLink = true }: UserMenuProps) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -96,14 +97,16 @@ export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout }: UserMenuP
             Gestione Profilo
           </a>
 
-          <a
-            href={`${bumblebeeUrl}/launchpad`}
-            className="flex items-center px-4 py-2 text-sm text-text-base hover:bg-subtle"
-            onClick={() => setOpen(false)}
-          >
-            <LayoutGrid className="h-4 w-4 mr-2 flex-shrink-0" />
-            Torna al LaunchPad
-          </a>
+          {showLaunchpadLink && (
+            <a
+              href={`${bumblebeeUrl}/launchpad`}
+              className="flex items-center px-4 py-2 text-sm text-text-base hover:bg-subtle"
+              onClick={() => setOpen(false)}
+            >
+              <LayoutGrid className="h-4 w-4 mr-2 flex-shrink-0" />
+              Torna al LaunchPad
+            </a>
+          )}
 
           <div className="border-t border-border my-1" />
 

@@ -13736,22 +13736,22 @@ function hw() {
     }
   ) : null;
 }
-function pw({ user: e, bumblebeeUrl: t, extraItems: n, onLogout: r }) {
-  const [o, a] = Ve(!1), s = Bt(null);
+function pw({ user: e, bumblebeeUrl: t, extraItems: n, onLogout: r, showLaunchpadLink: o = !0 }) {
+  const [a, s] = Ve(!1), i = Bt(null);
   Ht(() => {
-    const l = (u) => {
-      s.current && !s.current.contains(u.target) && a(!1);
+    const u = (m) => {
+      i.current && !i.current.contains(m.target) && s(!1);
     };
-    return document.addEventListener("mousedown", l), () => document.removeEventListener("mousedown", l);
+    return document.addEventListener("mousedown", u), () => document.removeEventListener("mousedown", u);
   }, []);
-  const i = r ?? (() => {
+  const c = r ?? (() => {
     window.location.href = `${t}/logout`;
-  }), c = n && n.length > 0;
-  return /* @__PURE__ */ E("div", { className: "relative", ref: s, children: [
+  }), l = n && n.length > 0;
+  return /* @__PURE__ */ E("div", { className: "relative", ref: i, children: [
     /* @__PURE__ */ E(
       "button",
       {
-        onClick: () => a(!o),
+        onClick: () => s(!a),
         className: "flex items-center space-x-2 text-text-muted hover:text-databeez-primary px-3 py-2 text-sm font-medium transition-colors",
         children: [
           /* @__PURE__ */ f(Ur, { className: "h-4 w-4" }),
@@ -13760,39 +13760,39 @@ function pw({ user: e, bumblebeeUrl: t, extraItems: n, onLogout: r }) {
         ]
       }
     ),
-    o && /* @__PURE__ */ E("div", { className: "absolute right-0 mt-2 w-56 bg-surface border border-border rounded-md shadow-lg py-1 z-50", children: [
+    a && /* @__PURE__ */ E("div", { className: "absolute right-0 mt-2 w-56 bg-surface border border-border rounded-md shadow-lg py-1 z-50", children: [
       /* @__PURE__ */ E("div", { className: "px-4 py-2 border-b border-border", children: [
         /* @__PURE__ */ f("p", { className: "text-sm font-medium text-text-base truncate", children: e.fullname }),
         /* @__PURE__ */ f("p", { className: "text-xs text-text-muted truncate", children: e.email })
       ] }),
-      c && /* @__PURE__ */ E(Ue, { children: [
+      l && /* @__PURE__ */ E(Ue, { children: [
         n.map(
-          (l, u) => l.href ? /* @__PURE__ */ E(
+          (u, m) => u.href ? /* @__PURE__ */ E(
             "a",
             {
-              href: l.href,
+              href: u.href,
               className: "flex items-center px-4 py-2 text-sm text-text-base hover:bg-subtle",
-              onClick: () => a(!1),
+              onClick: () => s(!1),
               children: [
-                l.icon && /* @__PURE__ */ f("span", { className: "mr-2 flex-shrink-0", children: l.icon }),
-                l.label
+                u.icon && /* @__PURE__ */ f("span", { className: "mr-2 flex-shrink-0", children: u.icon }),
+                u.label
               ]
             },
-            u
+            m
           ) : /* @__PURE__ */ E(
             "button",
             {
               onClick: () => {
-                var m;
-                a(!1), (m = l.onClick) == null || m.call(l);
+                var h;
+                s(!1), (h = u.onClick) == null || h.call(u);
               },
               className: "flex items-center w-full px-4 py-2 text-sm text-text-base hover:bg-subtle",
               children: [
-                l.icon && /* @__PURE__ */ f("span", { className: "mr-2 flex-shrink-0", children: l.icon }),
-                l.label
+                u.icon && /* @__PURE__ */ f("span", { className: "mr-2 flex-shrink-0", children: u.icon }),
+                u.label
               ]
             },
-            u
+            m
           )
         ),
         /* @__PURE__ */ f("div", { className: "border-t border-border my-1" })
@@ -13802,19 +13802,19 @@ function pw({ user: e, bumblebeeUrl: t, extraItems: n, onLogout: r }) {
         {
           href: `${t}/profile`,
           className: "flex items-center px-4 py-2 text-sm text-text-base hover:bg-subtle",
-          onClick: () => a(!1),
+          onClick: () => s(!1),
           children: [
             /* @__PURE__ */ f(Gl, { className: "h-4 w-4 mr-2 flex-shrink-0" }),
             "Gestione Profilo"
           ]
         }
       ),
-      /* @__PURE__ */ E(
+      o && /* @__PURE__ */ E(
         "a",
         {
           href: `${t}/launchpad`,
           className: "flex items-center px-4 py-2 text-sm text-text-base hover:bg-subtle",
-          onClick: () => a(!1),
+          onClick: () => s(!1),
           children: [
             /* @__PURE__ */ f(Zl, { className: "h-4 w-4 mr-2 flex-shrink-0" }),
             "Torna al LaunchPad"
@@ -13826,7 +13826,7 @@ function pw({ user: e, bumblebeeUrl: t, extraItems: n, onLogout: r }) {
         "button",
         {
           onClick: () => {
-            a(!1), i();
+            s(!1), c();
           },
           className: "flex items-center w-full px-4 py-2 text-sm text-text-base hover:bg-subtle",
           children: [
