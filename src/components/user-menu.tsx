@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { User, ChevronDown, LogOut, ExternalLink, LayoutGrid } from 'lucide-react'
 
 export interface UserMenuItem {
@@ -24,17 +25,33 @@ export interface UserMenuProps {
 
 export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchpadLink = true }: UserMenuProps) {
   const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({})
+  const containerRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (
+        containerRef.current && !containerRef.current.contains(e.target as Node) &&
+        (!menuRef.current || !menuRef.current.contains(e.target as Node))
+      ) {
         setOpen(false)
       }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [])
+
+  useEffect(() => {
+    if (open && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect()
+      setDropdownStyle({
+        top: rect.bottom + 8,
+        right: window.innerWidth - rect.right,
+      })
+    }
+  }, [open])
 
   const handleLogout = onLogout ?? (() => {
     window.location.href = `${bumblebeeUrl}/logout`
@@ -43,8 +60,9 @@ export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchp
   const hasExtra = extraItems && extraItems.length > 0
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative" ref={containerRef}>
       <button
+        ref={triggerRef}
         onClick={() => setOpen(!open)}
         className="flex items-center space-x-2 text-text-muted hover:text-databeez-primary px-3 py-2 text-sm font-medium transition-colors"
       >
@@ -53,8 +71,12 @@ export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchp
         <ChevronDown className="h-4 w-4" />
       </button>
 
-      {open && (
-        <div className="absolute right-0 mt-2 w-56 bg-surface border border-border rounded-md shadow-lg py-1 z-50">
+      {open && createPortal(
+        <div
+          ref={menuRef}
+          style={dropdownStyle}
+          className="fixed w-56 bg-surface border border-border rounded-md shadow-lg py-1 z-[9999]"
+        >
           <div className="px-4 py-2 border-b border-border">
             <p className="text-sm font-medium text-text-base truncate">{user.fullname}</p>
             <p className="text-xs text-text-muted truncate">{user.email}</p>
@@ -117,7 +139,8 @@ export function UserMenu({ user, bumblebeeUrl, extraItems, onLogout, showLaunchp
             <LogOut className="h-4 w-4 mr-2 flex-shrink-0" />
             Logout
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
