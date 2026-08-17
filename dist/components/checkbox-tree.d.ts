@@ -1,13 +1,14 @@
+import * as React from "react";
 export interface CheckboxTreeChild {
     key: string;
-    label: string;
+    label: React.ReactNode;
     checked: boolean;
     onToggle: () => void;
     /** Disabilitazione propria del figlio, indipendente dal padre. */
     disabled?: boolean;
 }
 export interface CheckboxTreeProps {
-    label: string;
+    label: React.ReactNode;
     /**
      * Interruttore del padre, INDIPENDENTE dallo stato dei figli — l'equivalente
      * di `!companyHidden` in BeeGraph, non un aggregato "tutti i figli accesi".

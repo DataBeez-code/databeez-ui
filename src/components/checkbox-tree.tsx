@@ -6,9 +6,13 @@ import { ChevronDown, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Checkbox } from "./checkbox"
 
-export interface CheckboxTreeChild {
+export /* Le etichette sono ReactNode e non stringhe perché un consumatore tipico ci
+   mette anche un indicatore accanto al testo — nel pannello dei filtri di
+   BeeGraph, il pallino con il colore del tipo di nodo, che è ciò che lega la riga
+   del filtro al nodo sul canvas. */
+interface CheckboxTreeChild {
   key: string
-  label: string
+  label: React.ReactNode
   checked: boolean
   onToggle: () => void
   /** Disabilitazione propria del figlio, indipendente dal padre. */
@@ -16,7 +20,7 @@ export interface CheckboxTreeChild {
 }
 
 export interface CheckboxTreeProps {
-  label: string
+  label: React.ReactNode
   /**
    * Interruttore del padre, INDIPENDENTE dallo stato dei figli — l'equivalente
    * di `!companyHidden` in BeeGraph, non un aggregato "tutti i figli accesi".

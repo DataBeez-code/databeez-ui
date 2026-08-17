@@ -1,6 +1,6 @@
 {
   "name": "@databeez-code/ui",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Databeez Design System — componenti React con Tailwind CSS",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
