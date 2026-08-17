@@ -10,6 +10,7 @@ export interface PersonMeta {
     label: string;
     icon: LucideIcon;
 }
+export declare const PERSON_TYPE_META: Record<'F' | 'P' | 'A', PersonMeta>;
 export declare function getPersonMeta(subType: string | undefined): PersonMeta;
 export type OrgType = 'S' | 'D' | 'E' | 'X' | 'P' | 'A';
 export interface OrgMeta {
@@ -26,3 +27,10 @@ export declare const LOCATION_META: {
     readonly label: "Sede";
     readonly icon: LucideIcon;
 };
+export type CategoriaPonte = 'banca' | 'fiduciaria';
+export interface PonteMeta {
+    label: string;
+    icon: LucideIcon;
+}
+export declare const PONTE_META: Record<CategoriaPonte, PonteMeta>;
+export declare function getPonteMeta(categoria: string | undefined | null): PonteMeta | undefined;

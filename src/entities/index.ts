@@ -9,6 +9,8 @@ import {
   User,
   MapPin,
   Warehouse,
+  Banknote,
+  ShieldCheck,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -41,11 +43,18 @@ export interface PersonMeta {
   icon: LucideIcon
 }
 
+// Semantica da honey.persona.tipo_persona (CHECK 'F','P','A'), vedi enum
+// TipoPersona in honey-core/src/honey_core/models.py: F = FISICA, P = PROFESSIONISTA,
+// A = ALTRO. La migration 030 di honey-core ha INVERTITO i valori (in precedenza
+// 'F' era il professionista) — non "correggere" questa mappa al contrario.
+export const PERSON_TYPE_META: Record<'F' | 'P' | 'A', PersonMeta> = {
+  F: { label: 'Persona fisica', icon: User },
+  P: { label: 'Professionista', icon: Briefcase },
+  A: { label: 'Altro', icon: User },
+}
+
 export function getPersonMeta(subType: string | undefined): PersonMeta {
-  switch (subType) {
-    case 'F': return { label: 'Professionista', icon: Briefcase }
-    default: return { label: 'Persona', icon: User }
-  }
+  return PERSON_TYPE_META[subType as 'F' | 'P' | 'A'] ?? { label: 'Persona', icon: User }
 }
 
 // ---------------------------------------------------------------------------
@@ -91,3 +100,30 @@ export const LOCATION_META = {
   label: 'Sede',
   icon: Warehouse,
 } as const
+
+// ---------------------------------------------------------------------------
+// Nodi ponte (organizzazioni che rendono illeggibile un grafo di connessioni:
+// banche e società fiduciarie — due soggetti che condividono la stessa banca
+// non hanno alcun legame reale tra loro)
+// ---------------------------------------------------------------------------
+
+export type CategoriaPonte = 'banca' | 'fiduciaria'
+
+export interface PonteMeta {
+  label: string
+  icon: LucideIcon
+}
+
+export const PONTE_META: Record<CategoriaPonte, PonteMeta> = {
+  banca: { label: 'Banca', icon: Banknote },
+  fiduciaria: { label: 'Società fiduciaria', icon: ShieldCheck },
+}
+
+// A differenza delle altre getMeta* di questo file, qui "nessuna categoria"
+// (null/undefined/qualsiasi altro valore) è il caso NORMALE: la stragrande
+// maggioranza delle organizzazioni non è un nodo ponte e il chiamante non deve
+// disegnare alcuna icona. Un fallback finirebbe per marcare ogni
+// organizzazione come ponte, quindi si ritorna undefined invece di un default.
+export function getPonteMeta(categoria: string | undefined | null): PonteMeta | undefined {
+  return PONTE_META[categoria as CategoriaPonte]
+}
