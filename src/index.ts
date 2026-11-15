@@ -52,6 +52,7 @@ export * from './hooks/useAsyncData'
 
 // Utilities
 export * from './lib/utils'
+export * from './lib/format'
 
 // Entities
 export * from './entities'

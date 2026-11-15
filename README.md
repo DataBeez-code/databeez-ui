@@ -100,6 +100,39 @@ export default function RootLayout({ children }) {
 
 ---
 
+## Formattatori (`format`)
+
+Formati italiani standard, esportati dal barrel: `formatEuro`, `formatNumber`, `formatPercent`, `formatDelta`, `formatDate`, `formatDateTime`.
+
+```ts
+import { formatEuro, formatPercent, formatDelta, formatDate } from "@databeez-code/ui"
+
+formatEuro(1234)                           // "€ 1.234"      (spazio indivisibile U+00A0)
+formatEuro(2500)                           // "€ 2.500"      (migliaia sempre separate)
+formatEuro(-2500)                          // "− € 2.500"    (meno vero U+2212 davanti al simbolo)
+formatEuro(1234.5, { cents: true })        // "€ 1.234,50"
+formatEuro(14_200_000, { compact: true })  // "€ 14,2 mln"
+formatPercent(12.5)                        // "12,5%"        (input in punti percentuali, non 0,125)
+formatDelta(-14)                           // "−14"          (+6 per i positivi)
+formatDate("2026-09-19")                   // "19/09/2026"
+formatDateTime(new Date(2026, 8, 19, 18, 30)) // "19/09/2026, 18:30"
+formatEuro(null)                           // "—"
+```
+
+- Valori mancanti (`null`, `undefined`, `NaN`, `Infinity`) e date non valide restituiscono il trattino lungo `—`, mai `NaN`.
+- La forma compatta (`compact: true`) è **opt-in** e si usa **solo in KPI e card**. Nelle colonne numeriche si usa sempre la forma piena con decimali uniformi, così le cifre si allineano a destra.
+- Le date accettano `string | Date`; le stringhe `AAAA-MM-GG` sono lette come data locale (nessuno slittamento di fuso).
+
+### Test
+
+```bash
+npm test
+```
+
+Esegue solo gli unit test (progetto vitest `unit`, ambiente node). Non avvia Playwright né Storybook.
+
+---
+
 ## UserMenu e ThemeSwitcher
 
 Componenti per l'header comune a tutti i prodotti DataBeez. Vanno sempre affiancati: `ThemeSwitcher` a sinistra, `UserMenu` a destra.
