@@ -113,7 +113,7 @@ Le app su Tailwind v3 ricevono i token con il preset e l'import di `globals.css`
 
 ## App consumatrici e versione corrente
 
-Rilevato il 2026-11-15 dai `package.json` delle app:
+Versioni nei `package.json` delle app (aggiornate a ogni adozione, TASK-888.13–.19):
 
 | App | Percorso | Versione in uso |
 |-----|----------|----------------|
@@ -123,7 +123,7 @@ Rilevato il 2026-11-15 dai `package.json` delle app:
 | Bumblebee | `bumblebee/src/frontend` | `v0.4.5` |
 | Swarm | `databeez-swarm/src/frontend` | `v0.4.5` |
 | Haive | `databeez-haive/frontend` | `v0.4.4` |
-| BeeScout | `beescout` | `v0.4.4` |
+| BeeScout | `beescout` | `v0.9.0` (Tailwind 4, `theme.css`) |
 
 abbrevia-portal non usa la libreria e resta fuori dal design system: ha uno stile proprio.
 Piano di allineamento: epic TASK-888 nel backlog (milestone «PROD - DESIGN SYSTEM»).
