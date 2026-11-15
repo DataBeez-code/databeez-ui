@@ -143,6 +143,35 @@ formatEuro(null)                           // "—"
 - La forma compatta (`compact: true`) è **opt-in** e si usa **solo in KPI e card**. Nelle colonne numeriche si usa sempre la forma piena con decimali uniformi, così le cifre si allineano a destra.
 - Le date accettano `string | Date`; le stringhe `AAAA-MM-GG` sono lette come data locale (nessuno slittamento di fuso).
 
+## Table: colonne numeriche, ordinamento, paginazione
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableSortHead, TableCell, Pagination, formatEuro } from "@databeez-code/ui"
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Causale</TableHead>
+      <TableSortHead numeric direction={dir /* "asc" | "desc" | null */} onSort={toggleSort}>Importo</TableSortHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {rows.map((r) => (
+      <TableRow key={r.id}>
+        <TableCell>{r.causale}</TableCell>
+        <TableCell numeric>{formatEuro(r.importo)}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+<Pagination page={page} pageCount={getPageCount(total, 20)} onPageChange={setPage} totalItems={total} />
+```
+
+- `numeric` (su `TableHead`, `TableCell`, `TableSortHead`): `text-right tabular-nums whitespace-nowrap`.
+- `TableSortHead`: `aria-sort` sul `<th>`, contenuto in un `<button>` (tastiera), icona di direzione. L'ordinamento dei dati lo fa l'app.
+- `Pagination`: `nav` con «Pagina X di N», pulsanti precedente/successiva disabilitati ai bordi, `totalItems` opzionale («1.234 risultati»). `getPageCount` e `clampPage` sono helper puri.
+- **Regola importi**: nelle colonne si usa sempre la forma piena di `formatEuro` (mai `compact`) con decimali uniformi nella colonna (tutti con `cents` o tutti senza).
+
 ### Test
 
 ```bash
@@ -150,6 +179,45 @@ npm test
 ```
 
 Esegue solo gli unit test (progetto vitest `unit`, ambiente node). Non avvia Playwright né Storybook.
+
+---
+
+## Delta, StatCard, Sparkline, ProgressBar
+
+### Delta
+
+Variazione con freccia e valore col segno (meno vero U+2212). Colori solo dai token `text-trend-positive/negative/neutral`; per gli screen reader aggiunge «in aumento», «in calo» o «invariato».
+
+```tsx
+<Delta value={12.4} suffix="%" format={(v) => formatDelta(v, 1)} />      {/* più fatturato = bene */}
+<Delta value={7} polarity="up-is-bad" />                                  {/* più errori = male (rosso) */}
+<Delta value={0.2} threshold={0.5} suffix=" pp" />                        {/* |valore| <= soglia → neutro */}
+```
+
+- `polarity`: `"up-is-good"` (default) o `"up-is-bad"`. La freccia segue sempre il segno; cambia solo il colore.
+- `threshold`: `|value| <= threshold` è neutro (default `0`). Valore mancante → `—`.
+- La logica pura è esportata come `getDeltaState(value, polarity, threshold)`.
+
+### StatCard
+
+Prop nuove, tutte opzionali e retrocompatibili:
+
+- `trend`: la forma storica `{ value: string, positive? }` resta valida; con `{ value: number, polarity?, format?, suffix?, threshold? }` è resa con `Delta`.
+- `hint`: nota sotto il valore (periodo di confronto, fonte).
+- `size="compact"`: allineata a sinistra e più densa, per le griglie KPI. Il valore usa `tabular-nums`.
+
+```tsx
+<StatCard size="compact" label="Fatturato" value={formatEuro(14_200_000, { compact: true })}
+  trend={{ value: 4.2, suffix: "%" }} hint="vs 2024" />
+```
+
+### Sparkline
+
+SVG senza dipendenze: `data`, `width`, `height`, `strokeWidth`, `area`. Il colore è `currentColor` (default `text-primary`): si cambia con una classe token, es. `className="text-trend-positive"`. Gestisce 0 o 1 punto e serie costanti. Senza `aria-label` è `aria-hidden`.
+
+### ProgressBar
+
+`value`, `max` (100), `tone` (`primary` | `success` | `warning` | `error` | `info` | `accent`), `label`, `showValue`. Ha ruolo `progressbar` con `aria-valuenow/min/max`; il valore è limitato fra 0 e `max`.
 
 ---
 
