@@ -164,7 +164,7 @@
   }
 
   .btn-databeez-accent {
-    @apply btn-databeez bg-databeez-accent hover:bg-primary-700 text-white shadow-lg hover:shadow-xl;
+    @apply btn-databeez bg-databeez-accent hover:bg-primary-500 text-primary-fg shadow-lg hover:shadow-xl;
   }
 
   .card-databeez {
