@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-databeez-primary text-white hover:bg-databeez-accent shadow-sm",
         destructive:
-          "bg-red-500 text-white hover:bg-red-600 shadow-sm",
+          "bg-error-500 text-white hover:bg-error-500/90 shadow-sm",
         outline:
           "border border-border bg-surface text-text-base hover:bg-subtle hover:text-text-base",
         secondary:

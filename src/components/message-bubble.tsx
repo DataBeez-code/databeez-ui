@@ -78,7 +78,7 @@ function MessageBubble({
               className={cn(
                 "inline-flex items-center transition-colors",
                 feedback === "up"
-                  ? "text-green-600"
+                  ? "text-success-fg"
                   : "text-text-muted hover:text-text-base"
               )}
             >
@@ -92,7 +92,7 @@ function MessageBubble({
               className={cn(
                 "inline-flex items-center transition-colors",
                 feedback === "down"
-                  ? "text-red-500"
+                  ? "text-error-fg"
                   : "text-text-muted hover:text-text-base"
               )}
             >

@@ -15,8 +15,8 @@ export interface FeatureCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 function FeatureCard({
   icon: Icon,
-  iconColor = "#f59e0b",
-  iconBg = "#f59e0b1a",
+  iconColor,
+  iconBg,
   title,
   description,
   action,
@@ -36,10 +36,10 @@ function FeatureCard({
       >
         <div className="flex items-start gap-4">
           <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-            style={{ backgroundColor: iconBg }}
+            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-primary/10"
+            style={iconBg ? { backgroundColor: iconBg } : undefined}
           >
-            <Icon className="h-6 w-6" style={{ color: iconColor }} />
+            <Icon className="h-6 w-6 text-primary" style={iconColor ? { color: iconColor } : undefined} />
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-base font-semibold text-text-base">{title}</h3>
@@ -63,10 +63,10 @@ function FeatureCard({
       {...props}
     >
       <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
-        style={{ backgroundColor: iconBg }}
+        className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-primary/10"
+        style={iconBg ? { backgroundColor: iconBg } : undefined}
       >
-        <Icon className="h-8 w-8" style={{ color: iconColor }} />
+        <Icon className="h-8 w-8 text-primary" style={iconColor ? { color: iconColor } : undefined} />
       </div>
       <h3 className="text-lg font-semibold text-text-base mb-3">{title}</h3>
       {description && (

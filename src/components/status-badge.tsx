@@ -8,10 +8,10 @@ const statusBadgeVariants = cva(
   {
     variants: {
       variant: {
-        success: "bg-green-500/10 text-green-600 dark:text-green-400",
-        warning: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-        error:   "bg-red-500/10 text-red-600 dark:text-red-400",
-        info:    "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+        success: "bg-success/10 text-success-fg",
+        warning: "bg-warning/10 text-warning-fg",
+        error:   "bg-error/10 text-error-fg",
+        info:    "bg-info/10 text-info-fg",
         neutral: "bg-subtle text-text-muted",
       },
     },
@@ -22,10 +22,10 @@ const statusBadgeVariants = cva(
 )
 
 const dotVariants: Record<string, string> = {
-  success: "bg-green-500",
-  warning: "bg-amber-500",
-  error:   "bg-red-500",
-  info:    "bg-blue-500",
+  success: "bg-success",
+  warning: "bg-warning",
+  error:   "bg-error",
+  info:    "bg-info",
   neutral: "bg-text-muted",
 }
 

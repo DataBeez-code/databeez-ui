@@ -99,8 +99,17 @@ I componenti usano token semantici Tailwind definiti via `@theme inline` nel CSS
 | `text-text-muted` | testo secondario/placeholder |
 | `border-border` | bordi |
 | `text-databeez-primary` | colore brand (hover link) |
+| `bg-emphasis` | grigio più marcato di subtle (tracce, step non ancora raggiunti). Non si chiama `muted` per non collidere con shadcn |
+| `text-text-subtle`, `border-border-strong` | testo terziario, bordo marcato |
+| `bg-primary`, `text-primary`, `bg-primary-light`, `text-primary-fg` | brand tematizzato light/dark (la scala `primary-50…900` resta) |
+| `success`, `warning`, `error`, `info`, `accent` | toni di stato: `bg-<tono>` pieno (pallini, icone), `text-<tono>-fg`, `bg-<tono>-bg`, `border-<tono>-border` |
+| `text-trend-positive/negative/neutral` | variazioni: buono/cattivo/neutro. La polarità (su = bene o male) la decide il componente |
+| `risk-na/low/med/high/very-high` (+ `-bg`) | livelli di rischio/score, stessi nomi di beemap |
+| `tabular-nums` (utility Tailwind) | cifre a larghezza fissa nelle colonne numeriche |
 
-Ogni app consumatrice deve dichiarare questi token nel proprio CSS globale. Vedi la sezione "Dark mode" nel README per l'esempio completo.
+I valori stanno in `globals.css` (`:root` e `.dark`, variabili RGB `--color-*`); `tailwind.config.js` li espone come classi. Nei componenti non si usano classi di palette grezze (`gray-500`, `red-600`…) né esadecimali: unica eccezione il tema sempre scuro di CodeBlock; le tinte selezionabili di ColorPicker e i colori del logo sono dati, non stili.
+
+Le app su Tailwind v3 ricevono i token con il preset e l'import di `globals.css`. Le app su Tailwind v4 (beemap, beegraph, beescout) oggi ricopiano le variabili nel proprio CSS: vedi TASK-888.03 per il CSS v4 ufficiale.
 
 ## App consumatrici e versione corrente
 

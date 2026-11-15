@@ -15,7 +15,7 @@ const stepCircleVariants = cva(
       state: {
         completed: "bg-databeez-primary text-white",
         active: "bg-databeez-primary text-white",
-        upcoming: "bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400",
+        upcoming: "bg-emphasis text-text-muted",
       },
     },
     defaultVariants: {
@@ -30,9 +30,9 @@ const stepCircleVariants = cva(
 const stepLabelVariants = cva("text-sm transition-colors", {
   variants: {
     state: {
-      completed: "text-gray-400 dark:text-gray-500",
-      active: "font-medium text-gray-900 dark:text-white",
-      upcoming: "text-gray-400 dark:text-gray-500",
+      completed: "text-text-subtle",
+      active: "font-medium text-text-base",
+      upcoming: "text-text-subtle",
     },
   },
   defaultVariants: {
@@ -47,7 +47,7 @@ const stepConnectorVariants = cva("w-8 h-px transition-colors", {
   variants: {
     completed: {
       true: "bg-databeez-primary",
-      false: "bg-gray-200 dark:bg-gray-700",
+      false: "bg-emphasis",
     },
   },
   defaultVariants: {

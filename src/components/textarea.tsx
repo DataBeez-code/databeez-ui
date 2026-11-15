@@ -27,10 +27,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           className={cn(
             "w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-text-base placeholder:text-text-muted",
-            "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500",
+            "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-subtle",
             "resize-y min-h-[80px] transition-colors",
-            error && "border-error-500 focus:ring-error-500 focus:border-error-500",
+            error && "border-error focus:ring-error focus:border-error",
             className
           )}
           aria-invalid={!!error}
@@ -38,7 +38,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p id={`${inputId}-error`} className="text-xs text-error-500">
+          <p id={`${inputId}-error`} className="text-xs text-error-fg">
             {error}
           </p>
         )}

@@ -43,7 +43,7 @@ export function AppLogo({ slug, size = 48, className, fallback }: AppLogoCompone
   const letter = (fallback ?? slug ?? '?').charAt(0).toUpperCase()
   return (
     <div
-      className={`rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-2xl text-amber-600 shrink-0 ${className ?? ''}`}
+      className={`rounded-lg bg-primary/15 flex items-center justify-center text-2xl text-primary shrink-0 ${className ?? ''}`}
       style={{ width: size, height: size }}
     >
       {letter}

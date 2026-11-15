@@ -35,7 +35,7 @@ function CopyButton({
       className={cn(
         "inline-flex items-center gap-1.5 text-sm transition-colors",
         copied
-          ? "text-green-600"
+          ? "text-success-fg"
           : "text-text-muted hover:text-text-base",
         className
       )}

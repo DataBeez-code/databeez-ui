@@ -1,5 +1,16 @@
 const colors = require('tailwindcss/colors')
 
+// Colore da variabile CSS RGB (definita in globals.css, light e .dark), con supporto all'opacità
+const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`
+
+// Un tono di stato: bg-success (pieno), text-success-fg, bg-success-bg, border-success-border
+const statusTone = (name) => ({
+  DEFAULT: token(name),
+  fg: token(`${name}-fg`),
+  bg: token(`${name}-bg`),
+  border: token(`${name}-border`),
+})
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -55,15 +66,48 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.gray,
-        primary: colors.amber,
+        // Scala amber (primary-50…900) invariata, più i token tematizzati light/dark
+        primary: {
+          ...colors.amber,
+          DEFAULT: token('primary'),
+          hover: token('primary-hover'),
+          light: token('primary-light'),
+          fg: token('primary-fg'),
+        },
 
         // CSS-variable based semantic tokens (light/dark mode via .dark class)
-        base: 'rgb(var(--color-bg-base) / <alpha-value>)',
-        surface: 'rgb(var(--color-bg-surface) / <alpha-value>)',
-        subtle: 'rgb(var(--color-bg-subtle) / <alpha-value>)',
-        border: 'rgb(var(--color-border) / <alpha-value>)',
-        'text-base': 'rgb(var(--color-text-base) / <alpha-value>)',
-        'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
+        base: token('bg-base'),
+        surface: token('bg-surface'),
+        subtle: token('bg-subtle'),
+        // Grigio più marcato di subtle. Non "muted": collide con i token shadcn (beegraph)
+        // e con bg-muted già usato senza effetto in swarm.
+        emphasis: token('bg-emphasis'),
+        border: {
+          DEFAULT: token('border'),
+          strong: token('border-strong'),
+        },
+        'text-base': token('text-base'),
+        'text-muted': token('text-muted'),
+        'text-subtle': token('text-subtle'),
+
+        // Toni di stato: <tono> pieno, -fg testo, -bg sfondo tenue, -border
+        info: statusTone('info'),
+        accent: statusTone('accent'),
+
+        // Variazioni (Delta, trend di StatCard): la polarità la decide il componente
+        trend: {
+          positive: token('trend-positive'),
+          negative: token('trend-negative'),
+          neutral: token('trend-neutral'),
+        },
+
+        // Rischio / score: stessi nomi di beemap (text-risk-low, bg-risk-low-bg, …)
+        risk: Object.fromEntries(
+          ['na', 'low', 'med', 'high', 'very-high'].flatMap((level) => [
+            [level, token(`risk-${level}`)],
+            [`${level}-bg`, token(`risk-${level}-bg`)],
+          ])
+        ),
 
         // Brand aliases
         'databeez-primary': colors.amber[500],
@@ -78,18 +122,21 @@ module.exports = {
         'category-base': colors.blue[500],
         'category-vertical': colors.emerald[500],
 
-        // Semantic status colors
+        // Toni di stato: token tematizzati più la scala statica 50/500/900 storica (retrocompatibile)
         success: {
+          ...statusTone('success'),
           50: '#ecfdf5',
           500: '#10b981',
           900: '#064e3b',
         },
         warning: {
+          ...statusTone('warning'),
           50: '#fffbeb',
           500: colors.amber[500],
           900: '#78350f',
         },
         error: {
+          ...statusTone('error'),
           50: '#fef2f2',
           500: '#ef4444',
           900: '#7f1d1d',

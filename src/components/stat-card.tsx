@@ -16,7 +16,7 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 function StatCard({
   icon: Icon,
-  iconColor = "#f59e0b",
+  iconColor,
   label,
   value,
   trend,
@@ -33,8 +33,8 @@ function StatCard({
     >
       {Icon && (
         <Icon
-          className="h-6 w-6 mx-auto mb-2"
-          style={{ color: iconColor }}
+          className="h-6 w-6 mx-auto mb-2 text-primary"
+          style={iconColor ? { color: iconColor } : undefined}
         />
       )}
       <div className="text-2xl font-bold text-text-base">{value}</div>
@@ -43,7 +43,7 @@ function StatCard({
         <div
           className={cn(
             "text-xs font-medium mt-1",
-            trend.positive ? "text-green-600" : "text-red-500"
+            trend.positive ? "text-trend-positive" : "text-trend-negative"
           )}
         >
           {trend.value}

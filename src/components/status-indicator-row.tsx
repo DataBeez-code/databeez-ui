@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils"
 type StatusVariant = "operational" | "degraded" | "outage" | "maintenance"
 
 const variantConfig: Record<StatusVariant, { dot: string; text: string; label: string }> = {
-  operational: { dot: "bg-green-500", text: "text-green-500 dark:text-green-400", label: "Operational" },
-  degraded:    { dot: "bg-yellow-500", text: "text-yellow-500 dark:text-yellow-400", label: "Degraded" },
-  outage:      { dot: "bg-red-500", text: "text-red-500 dark:text-red-400", label: "Outage" },
+  operational: { dot: "bg-success", text: "text-success-fg", label: "Operational" },
+  degraded:    { dot: "bg-warning", text: "text-warning-fg", label: "Degraded" },
+  outage:      { dot: "bg-error", text: "text-error-fg", label: "Outage" },
   maintenance: { dot: "bg-text-muted", text: "text-text-muted", label: "Maintenance" },
 }
 

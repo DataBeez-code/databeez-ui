@@ -61,7 +61,7 @@ function DateRangePicker({
               "focus:outline-none focus:ring-2 focus:ring-databeez-primary focus:border-databeez-primary",
               "disabled:cursor-not-allowed disabled:opacity-50",
               !displayValue && "text-text-muted",
-              error && "border-red-300 focus:ring-red-500 focus:border-red-500",
+              error && "border-error focus:ring-error focus:border-error",
               className
             )}
           >
@@ -81,7 +81,7 @@ function DateRangePicker({
           />
         </PopoverContent>
       </Popover>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-error-fg">{error}</p>}
       {helperText && !error && (
         <p className="text-xs text-text-muted">{helperText}</p>
       )}

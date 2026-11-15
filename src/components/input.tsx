@@ -23,14 +23,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     id={inputId}
                     className={clsx(
                         'block w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-base shadow-sm focus:border-databeez-primary focus:ring-2 focus:ring-databeez-primary focus:outline-none placeholder:text-text-muted',
-                        error && 'border-red-300 focus:border-red-500 focus:ring-red-500',
+                        error && 'border-error focus:border-error focus:ring-error',
                         className
                     )}
                     ref={ref}
                     {...props}
                 />
                 {error && (
-                    <p className="text-sm text-red-600">{error}</p>
+                    <p className="text-sm text-error-fg">{error}</p>
                 )}
                 {helperText && !error && (
                     <p className="text-sm text-text-muted">{helperText}</p>

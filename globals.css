@@ -9,7 +9,7 @@
     --color-bg-base: 249 250 251;        /* gray-50 */
     --color-bg-surface: 255 255 255;     /* white */
     --color-bg-subtle: 243 244 246;      /* gray-100 */
-    --color-bg-muted: 229 231 235;       /* gray-200 */
+    --color-bg-emphasis: 229 231 235;    /* gray-200 — classe bg-emphasis (non "muted": collide con shadcn) */
 
     /* Borders */
     --color-border: 229 231 235;         /* gray-200 */
@@ -20,20 +20,50 @@
     --color-text-muted: 107 114 128;     /* gray-500 */
     --color-text-subtle: 156 163 175;    /* gray-400 */
 
-    /* Brand (Amber) */
+    /* Brand (Amber) — classi primary, primary-hover, primary-light */
     --color-primary: 245 158 11;         /* amber-500 */
     --color-primary-hover: 217 119 6;    /* amber-600 */
     --color-primary-light: 254 243 199;  /* amber-100 */
+    --color-primary-fg: 17 24 39;        /* gray-900: testo su sfondo primary, leggibile anche in dark */
 
-    /* Semantic */
+    /* Stati — per ogni tono: pieno (pallini, icone), -fg (testo), -bg (sfondo tenue), -border */
     --color-success: 16 185 129;         /* emerald-500 */
-    --color-success-light: 236 253 245;  /* emerald-50 */
+    --color-success-fg: 4 120 87;        /* emerald-700 */
+    --color-success-bg: 236 253 245;     /* emerald-50 */
+    --color-success-border: 167 243 208; /* emerald-200 */
     --color-warning: 245 158 11;         /* amber-500 */
-    --color-warning-light: 255 251 235;  /* amber-50 */
+    --color-warning-fg: 180 83 9;        /* amber-700 */
+    --color-warning-bg: 255 251 235;     /* amber-50 */
+    --color-warning-border: 253 230 138; /* amber-200 */
     --color-error: 239 68 68;            /* red-500 */
-    --color-error-light: 254 242 242;    /* red-50 */
+    --color-error-fg: 185 28 28;         /* red-700 */
+    --color-error-bg: 254 242 242;       /* red-50 */
+    --color-error-border: 254 202 202;   /* red-200 */
     --color-info: 59 130 246;            /* blue-500 */
-    --color-info-light: 239 246 255;     /* blue-50 */
+    --color-info-fg: 29 78 216;          /* blue-700 */
+    --color-info-bg: 239 246 255;        /* blue-50 */
+    --color-info-border: 191 219 254;    /* blue-200 */
+    --color-accent: 139 92 246;          /* violet-500 */
+    --color-accent-fg: 109 40 217;       /* violet-700 */
+    --color-accent-bg: 245 243 255;      /* violet-50 */
+    --color-accent-border: 221 214 254;  /* violet-200 */
+
+    /* Variazioni: semantica buono/cattivo; la polarità (su = bene o male) la decide il componente */
+    --color-trend-positive: var(--color-success-fg);
+    --color-trend-negative: var(--color-error-fg);
+    --color-trend-neutral: var(--color-text-muted);
+
+    /* Rischio / score — nomi e valori identici a beemap (app/globals.css) */
+    --color-risk-na: 156 163 175;
+    --color-risk-low: 16 185 129;
+    --color-risk-med: 245 158 11;
+    --color-risk-high: 249 115 22;
+    --color-risk-very-high: 239 68 68;
+    --color-risk-na-bg: 243 244 246;
+    --color-risk-low-bg: 236 253 245;
+    --color-risk-med-bg: 255 251 235;
+    --color-risk-high-bg: 255 247 237;
+    --color-risk-very-high-bg: 254 242 242;
   }
 
   /* ── Dark Mode Tokens ─────────────────────────────── */
@@ -41,7 +71,7 @@
     --color-bg-base: 17 24 39;           /* gray-900 */
     --color-bg-surface: 31 41 55;        /* gray-800 */
     --color-bg-subtle: 55 65 81;         /* gray-700 */
-    --color-bg-muted: 75 85 99;          /* gray-600 */
+    --color-bg-emphasis: 75 85 99;       /* gray-600 */
 
     --color-border: 55 65 81;            /* gray-700 */
     --color-border-strong: 107 114 128;  /* gray-500 */
@@ -53,6 +83,44 @@
     --color-primary: 251 191 36;         /* amber-400 */
     --color-primary-hover: 245 158 11;   /* amber-500 */
     --color-primary-light: 120 53 15;    /* amber-900 */
+
+    --color-success: 52 211 153;         /* emerald-400 */
+    --color-success-fg: 110 231 183;     /* emerald-300 */
+    --color-success-bg: 2 44 34;         /* emerald-950 */
+    --color-success-border: 6 95 70;     /* emerald-800 */
+    --color-warning: 251 191 36;         /* amber-400 */
+    --color-warning-fg: 252 211 77;      /* amber-300 */
+    --color-warning-bg: 69 26 3;         /* amber-950 */
+    --color-warning-border: 146 64 14;   /* amber-800 */
+    --color-error: 248 113 113;          /* red-400 */
+    --color-error-fg: 252 165 165;       /* red-300 */
+    --color-error-bg: 69 10 10;          /* red-950 */
+    --color-error-border: 153 27 27;     /* red-800 */
+    --color-info: 96 165 250;            /* blue-400 */
+    --color-info-fg: 147 197 253;        /* blue-300 */
+    --color-info-bg: 23 37 84;           /* blue-950 */
+    --color-info-border: 30 64 175;      /* blue-800 */
+    --color-accent: 167 139 250;         /* violet-400 */
+    --color-accent-fg: 196 181 253;      /* violet-300 */
+    --color-accent-bg: 46 16 101;        /* violet-950 */
+    --color-accent-border: 91 33 182;    /* violet-800 */
+
+    /* Ridichiarati qui: un alias var() si risolve sull'elemento che lo dichiara, quindi
+       se .dark è su un contenitore (non su <html>) erediterebbe i valori chiari. */
+    --color-trend-positive: var(--color-success-fg);
+    --color-trend-negative: var(--color-error-fg);
+    --color-trend-neutral: var(--color-text-muted);
+
+    --color-risk-na: 107 114 128;
+    --color-risk-low: 52 211 153;
+    --color-risk-med: 251 191 36;
+    --color-risk-high: 251 146 60;
+    --color-risk-very-high: 248 113 113;
+    --color-risk-na-bg: 55 65 81;
+    --color-risk-low-bg: 6 78 59;
+    --color-risk-med-bg: 120 53 15;
+    --color-risk-high-bg: 124 45 18;
+    --color-risk-very-high-bg: 127 29 29;
   }
 
   html {

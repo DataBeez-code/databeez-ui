@@ -79,7 +79,7 @@ function ColorPicker({
               "flex h-10 w-full items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm text-left",
               "focus:outline-none focus:ring-2 focus:ring-databeez-primary focus:border-databeez-primary",
               "disabled:cursor-not-allowed disabled:opacity-50",
-              error && "border-red-300 focus:ring-red-500 focus:border-red-500",
+              error && "border-error focus:ring-error focus:border-error",
               className
             )}
           >
@@ -150,7 +150,7 @@ function ColorPicker({
           </div>
         </PopoverContent>
       </Popover>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-error-fg">{error}</p>}
       {helperText && !error && (
         <p className="text-xs text-text-muted">{helperText}</p>
       )}

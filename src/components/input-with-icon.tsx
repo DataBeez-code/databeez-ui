@@ -49,7 +49,7 @@ const InputWithIcon = React.forwardRef<HTMLInputElement, InputWithIconProps>(
               "focus:outline-none focus:ring-2 focus:ring-databeez-primary focus:border-databeez-primary",
               "placeholder:text-text-muted transition-colors",
               rightElement ? "pr-10" : "pr-4",
-              error && "border-red-300 focus:ring-red-500 focus:border-red-500",
+              error && "border-error focus:ring-error focus:border-error",
               className
             )}
             {...props}
@@ -60,7 +60,7 @@ const InputWithIcon = React.forwardRef<HTMLInputElement, InputWithIconProps>(
             </div>
           )}
         </div>
-        {error && <p className="text-xs text-red-600">{error}</p>}
+        {error && <p className="text-xs text-error-fg">{error}</p>}
         {helperText && !error && (
           <p className="text-xs text-text-muted">{helperText}</p>
         )}
