@@ -133,6 +133,45 @@ Esegue solo gli unit test (progetto vitest `unit`, ambiente node). Non avvia Pla
 
 ---
 
+## Delta, StatCard, Sparkline, ProgressBar
+
+### Delta
+
+Variazione con freccia e valore col segno (meno vero U+2212). Colori solo dai token `text-trend-positive/negative/neutral`; per gli screen reader aggiunge «in aumento», «in calo» o «invariato».
+
+```tsx
+<Delta value={12.4} suffix="%" format={(v) => formatDelta(v, 1)} />      {/* più fatturato = bene */}
+<Delta value={7} polarity="up-is-bad" />                                  {/* più errori = male (rosso) */}
+<Delta value={0.2} threshold={0.5} suffix=" pp" />                        {/* |valore| <= soglia → neutro */}
+```
+
+- `polarity`: `"up-is-good"` (default) o `"up-is-bad"`. La freccia segue sempre il segno; cambia solo il colore.
+- `threshold`: `|value| <= threshold` è neutro (default `0`). Valore mancante → `—`.
+- La logica pura è esportata come `getDeltaState(value, polarity, threshold)`.
+
+### StatCard
+
+Prop nuove, tutte opzionali e retrocompatibili:
+
+- `trend`: la forma storica `{ value: string, positive? }` resta valida; con `{ value: number, polarity?, format?, suffix?, threshold? }` è resa con `Delta`.
+- `hint`: nota sotto il valore (periodo di confronto, fonte).
+- `size="compact"`: allineata a sinistra e più densa, per le griglie KPI. Il valore usa `tabular-nums`.
+
+```tsx
+<StatCard size="compact" label="Fatturato" value={formatEuro(14_200_000, { compact: true })}
+  trend={{ value: 4.2, suffix: "%" }} hint="vs 2024" />
+```
+
+### Sparkline
+
+SVG senza dipendenze: `data`, `width`, `height`, `strokeWidth`, `area`. Il colore è `currentColor` (default `text-primary`): si cambia con una classe token, es. `className="text-trend-positive"`. Gestisce 0 o 1 punto e serie costanti. Senza `aria-label` è `aria-hidden`.
+
+### ProgressBar
+
+`value`, `max` (100), `tone` (`primary` | `success` | `warning` | `error` | `info` | `accent`), `label`, `showValue`. Ha ruolo `progressbar` con `aria-valuenow/min/max`; il valore è limitato fra 0 e `max`.
+
+---
+
 ## UserMenu e ThemeSwitcher
 
 Componenti per l'header comune a tutti i prodotti DataBeez. Vanno sempre affiancati: `ThemeSwitcher` a sinistra, `UserMenu` a destra.
