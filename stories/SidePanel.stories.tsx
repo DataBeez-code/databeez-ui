@@ -16,12 +16,22 @@ const meta: Meta<typeof SidePanel> = {
 export default meta
 type Story = StoryObj<typeof SidePanel>
 
-function Demo({ children, header, width }: { children: React.ReactNode; header?: React.ReactNode; width?: number }) {
+function Demo({
+  children,
+  header,
+  width,
+  resizable,
+}: {
+  children: React.ReactNode
+  header?: React.ReactNode
+  width?: number
+  resizable?: boolean
+}) {
   const [open, setOpen] = React.useState(true)
   return (
     <div className="p-6 min-h-screen bg-base">
       <Button variant="outline" onClick={() => setOpen(true)}>Apri pannello</Button>
-      <SidePanel open={open} onClose={() => setOpen(false)} header={header} width={width}>
+      <SidePanel open={open} onClose={() => setOpen(false)} header={header} width={width} resizable={resizable}>
         {children}
       </SidePanel>
     </div>
@@ -73,6 +83,19 @@ export const ContenutoLungo: Story = {
             <InfoRow label="Campo 3" />
           </Section>
         ))}
+      </div>
+    </Demo>
+  ),
+}
+
+export const Ridimensionabile: Story = {
+  render: () => (
+    <Demo
+      resizable
+      header={<h2 className="font-semibold text-text-base">Trascina il bordo sinistro</h2>}
+    >
+      <div className="px-4 pb-4 text-sm text-text-base">
+        <p>Larghezza minima 280 px, massima 640 px. Dalla tastiera: focus sulla maniglia, poi frecce (Maiusc = passo maggiore), Home/End.</p>
       </div>
     </Demo>
   ),

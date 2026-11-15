@@ -112,13 +112,46 @@ export default function RootLayout({ children }) {
 
 | Categoria | Componenti |
 |-----------|-----------|
-| **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select` |
+| **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select`, `MultiSelect`, `FilterChip` |
 | **Display** | `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `Spinner` |
-| **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs` |
+| **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs`, `Accordion`, `SidePanel` |
 | **Feedback** | `Alert`, `EmptyState`, `Skeleton` |
 | **Content** | `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` |
 | **System** | `Table`, `Dialog`, `StatusIndicatorRow`, `ThemeProvider` |
 | **App Shell** | `UserMenu`, `ThemeSwitcher` |
+
+---
+
+## MultiSelect, FilterChip, Accordion, SidePanel ridimensionabile
+
+```tsx
+<MultiSelect
+  label="Regioni"
+  options={[{ value: "lom", label: "Lombardia" }, { value: "pie", label: "Piemonte" }]}
+  value={regioni}              // string[]
+  onChange={setRegioni}
+  showBulkActions              // «Seleziona tutto» / «Deseleziona» sui risultati filtrati
+  maxVisibleLabels={2}         // nel trigger: «Lombardia, Piemonte +1»; 0 = «3 selezionati»
+/>
+
+<FilterChip label="Solo attive" active={on} onClick={toggle} />   {/* toggle, aria-pressed */}
+<FilterChip label="Lombardia" active onRemove={rimuovi} />        {/* pulsante «Rimuovi Lombardia» */}
+
+<Accordion type="single" collapsible>
+  <AccordionItem value="a">
+    <AccordionTrigger>Anagrafica</AccordionTrigger>
+    <AccordionContent>...</AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+<SidePanel open onClose={close} resizable minWidth={280} maxWidth={640} defaultWidth={380} onWidthChange={salva}>
+  ...
+</SidePanel>
+```
+
+- `MultiSelect`: stessa API di `Combobox` (`options`, `label`, `error`, `helperText`) ma con `value: string[]`. Tastiera: frecce nella lista, Invio seleziona/deseleziona, Esc chiude.
+- `SidePanel`: senza `resizable` markup e comportamento non cambiano. Con `resizable` compare una maniglia (`role="separator"`) sul bordo sinistro: trascinamento, frecce (Maiusc = passo x5), Home/End. La persistenza della larghezza è a carico dell'app tramite `onWidthChange`. Le funzioni pure (`clampWidth`, `widthAfterDrag`, `widthAfterKey`) sono esportate.
+- `Accordion` si basa su `@radix-ui/react-accordion`; l'animazione usa `grid-template-rows`, senza plugin.
 
 ---
 
