@@ -117,11 +117,11 @@ Versioni nei `package.json` delle app (aggiornate a ogni adozione, TASK-888.13â€
 
 | App | Percorso | Versione in uso |
 |-----|----------|----------------|
-| BeeGraph | `beegraph` | `v0.7.1` |
-| BeeMap | `beemap` | `v0.5.0` |
-| Data Alveus | `data-alveus/frontend` | `v0.5.0` |
+| BeeGraph | `beegraph` | `v0.9.0` (Tailwind 4, `theme.css`) |
+| BeeMap | `beemap` | `v0.9.0` (Tailwind 4, `theme.css`) |
+| Data Alveus | `data-alveus/frontend` | `v0.9.0` |
 | Bumblebee | `bumblebee/src/frontend` | `v0.9.0` |
-| Swarm | `databeez-swarm/src/frontend` | `v0.4.5` |
+| Swarm | `databeez-swarm/src/frontend` | `v0.9.0` |
 | Haive | `databeez-haive/frontend` | `v0.9.0` |
 | BeeScout | `beescout` | `v0.9.0` (Tailwind 4, `theme.css`) |
 
