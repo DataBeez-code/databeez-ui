@@ -109,7 +109,7 @@ I componenti usano token semantici Tailwind definiti via `@theme inline` nel CSS
 
 I valori stanno in `globals.css` (`:root` e `.dark`, variabili RGB `--color-*`); `tailwind.config.js` li espone come classi. Nei componenti non si usano classi di palette grezze (`gray-500`, `red-600`…) né esadecimali: unica eccezione il tema sempre scuro di CodeBlock; le tinte selezionabili di ColorPicker e i colori del logo sono dati, non stili.
 
-Le app su Tailwind v3 ricevono i token con il preset e l'import di `globals.css`. Le app su Tailwind v4 (beemap, beegraph, beescout) oggi ricopiano le variabili nel proprio CSS: vedi TASK-888.03 per il CSS v4 ufficiale.
+Le app su Tailwind v3 ricevono i token con il preset e l'import di `globals.css`; le app su Tailwind v4 (beemap, beegraph, beescout) con `@import "@databeez-code/ui/theme.css"`. `theme.css` è GENERATO (`npm run build:theme`, parte con `npm run build`) da `globals.css` e `tailwind.config.js`: non modificarlo a mano, e dopo aver cambiato un token rigeneralo (il test unit fallisce se è disallineato).
 
 ## App consumatrici e versione corrente
 

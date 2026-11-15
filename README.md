@@ -64,6 +64,26 @@ module.exports = {
 import { Button, Card, StatusBadge } from '@databeez-code/ui'
 ```
 
+### App su Tailwind v4
+
+Le app su Tailwind v4 non usano il preset: importano `theme.css`, generato dagli stessi token di `globals.css` e `tailwind.config.js` (unica fonte, vedi sotto).
+
+```css
+/* app/globals.css (Next) oppure src/index.css (Vite) */
+@import "tailwindcss";
+@import "@databeez-code/ui/theme.css";
+```
+
+Basta questo: il file include `@source` verso i componenti della libreria, `@custom-variant dark` per la dark mode a classe (`.dark` su `<html>` o su un contenitore, con `ThemeProvider` e `THEME_ANTI_FOUC_SCRIPT` come sotto) e tutti i colori come utility (`bg-surface`, `text-text-muted`, `bg-success-bg`, `text-error-fg`, `bg-risk-low-bg`, `bg-success/10`, ...), più `shadow-databeez`, `shadow-databeez-lg` e `font-heading`. Non ridefinisce spaziature, raggi, ombre standard e breakpoint (restano quelli di v4) e non include la scala `gray-*` (resta quella di v4).
+
+**Da togliere dal CSS dell'app** (altrimenti sono copie che divergono): i blocchi `:root` e `.dark` con le variabili `--color-*` dei token DataBeez, il blocco `@theme inline` con gli alias, `@custom-variant dark` e i `@source` verso `@databeez-code/ui` (`dist/index.cjs`, `src/...`).
+
+**Variabili grezze:** nel CSS v4 i triplet RGB si chiamano `--dbz-*` (es. `--dbz-bg-base`, `--dbz-success-fg`), non `--color-*`, perché in v4 `--color-*` è il namespace del tema e `--color-success: rgb(var(--color-success))` sarebbe un ciclo. Se l'app usa direttamente `rgb(var(--color-bg-base))` nel proprio CSS, passi a `rgb(var(--dbz-bg-base))`.
+
+**Con shadcn (beegraph):** `--color-accent` è definito sia da shadcn sia da `theme.css`; vince la dichiarazione `@theme` che compare dopo. Metti `@import "@databeez-code/ui/theme.css"` prima del `@theme inline` dell'app: `bg-accent` resta quello di shadcn, mentre `accent-fg`, `accent-bg` e `accent-border` (usati dai componenti) restano di DataBeez. Non esiste un token `muted` (usa `emphasis`).
+
+**Fonte unica dei token:** i valori stanno solo in `globals.css` (`:root` e `.dark`), i nomi delle classi solo in `tailwind.config.js`. `theme.css` si rigenera con `npm run build:theme` (parte anche con `npm run build`) e un test unit (`npm test`) fallisce se il file committato non è allineato. Non modificare `theme.css` a mano.
+
 ### Dark mode (anti-FOUC)
 
 ```tsx

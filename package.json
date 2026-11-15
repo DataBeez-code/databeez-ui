@@ -12,12 +12,14 @@
       "require": "./dist/index.cjs"
     },
     "./globals.css": "./globals.css",
+    "./theme.css": "./theme.css",
     "./tailwind.config": "./tailwind.config.js"
   },
   "files": [
     "dist",
     "src",
     "globals.css",
+    "theme.css",
     "tailwind.config.js"
   ],
   "publishConfig": {
@@ -28,7 +30,8 @@
     "url": "https://github.com/Databeez-code/databeez-ui.git"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node scripts/build-theme-css.mjs",
+    "build:theme": "node scripts/build-theme-css.mjs",
     "test": "vitest run --project unit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

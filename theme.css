@@ -1,0 +1,199 @@
+/* GENERATO da scripts/build-theme-css.mjs — NON modificare a mano.
+ * Fonti: globals.css (valori dei token, :root e .dark) e tailwind.config.js (nomi delle classi).
+ * Rigenerazione: npm run build:theme (parte anche con npm run build).
+ *
+ * Uso in un'app Tailwind v4:
+ *   @import "tailwindcss";
+ *   @import "@databeez-code/ui/theme.css";
+ */
+
+/* Classi della libreria. Percorso relativo a questo file (dentro node_modules/@databeez-code/ui).
+ * Solo index.*: i chunk di dist/ sono lingue di syntax highlighting caricate a richiesta, senza classi
+ * Tailwind, e scansionarli genererebbe CSS inutile. */
+@source "./dist/index.{mjs,cjs}";
+
+/* Dark mode a classe: .dark su <html> o su un contenitore (come darkMode: 'class' di v3) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Valori grezzi (triplet RGB), tematizzati light/dark. Prefisso --dbz-: vedi nota sopra. */
+@layer base {
+  :root {
+    --dbz-bg-base: 249 250 251; /* gray-50 */
+    --dbz-bg-surface: 255 255 255; /* white */
+    --dbz-bg-subtle: 243 244 246; /* gray-100 */
+    --dbz-bg-emphasis: 229 231 235; /* gray-200 — classe bg-emphasis (non "muted": collide con shadcn) */
+    --dbz-border: 229 231 235; /* gray-200 */
+    --dbz-border-strong: 156 163 175; /* gray-400 */
+    --dbz-text-base: 17 24 39; /* gray-900 */
+    --dbz-text-muted: 107 114 128; /* gray-500 */
+    --dbz-text-subtle: 156 163 175; /* gray-400 */
+    --dbz-primary: 245 158 11; /* amber-500 */
+    --dbz-primary-hover: 217 119 6; /* amber-600 */
+    --dbz-primary-light: 254 243 199; /* amber-100 */
+    --dbz-primary-fg: 17 24 39; /* gray-900: testo su sfondo primary, leggibile anche in dark */
+    --dbz-success: 16 185 129; /* emerald-500 */
+    --dbz-success-fg: 4 120 87; /* emerald-700 */
+    --dbz-success-bg: 236 253 245; /* emerald-50 */
+    --dbz-success-border: 167 243 208; /* emerald-200 */
+    --dbz-warning: 245 158 11; /* amber-500 */
+    --dbz-warning-fg: 180 83 9; /* amber-700 */
+    --dbz-warning-bg: 255 251 235; /* amber-50 */
+    --dbz-warning-border: 253 230 138; /* amber-200 */
+    --dbz-error: 239 68 68; /* red-500 */
+    --dbz-error-fg: 185 28 28; /* red-700 */
+    --dbz-error-bg: 254 242 242; /* red-50 */
+    --dbz-error-border: 254 202 202; /* red-200 */
+    --dbz-info: 59 130 246; /* blue-500 */
+    --dbz-info-fg: 29 78 216; /* blue-700 */
+    --dbz-info-bg: 239 246 255; /* blue-50 */
+    --dbz-info-border: 191 219 254; /* blue-200 */
+    --dbz-accent: 139 92 246; /* violet-500 */
+    --dbz-accent-fg: 109 40 217; /* violet-700 */
+    --dbz-accent-bg: 245 243 255; /* violet-50 */
+    --dbz-accent-border: 221 214 254; /* violet-200 */
+    --dbz-trend-positive: var(--dbz-success-fg);
+    --dbz-trend-negative: var(--dbz-error-fg);
+    --dbz-trend-neutral: var(--dbz-text-muted);
+    --dbz-risk-na: 156 163 175;
+    --dbz-risk-low: 16 185 129;
+    --dbz-risk-med: 245 158 11;
+    --dbz-risk-high: 249 115 22;
+    --dbz-risk-very-high: 239 68 68;
+    --dbz-risk-na-bg: 243 244 246;
+    --dbz-risk-low-bg: 236 253 245;
+    --dbz-risk-med-bg: 255 251 235;
+    --dbz-risk-high-bg: 255 247 237;
+    --dbz-risk-very-high-bg: 254 242 242;
+  }
+
+  .dark {
+    --dbz-bg-base: 17 24 39; /* gray-900 */
+    --dbz-bg-surface: 31 41 55; /* gray-800 */
+    --dbz-bg-subtle: 55 65 81; /* gray-700 */
+    --dbz-bg-emphasis: 75 85 99; /* gray-600 */
+    --dbz-border: 55 65 81; /* gray-700 */
+    --dbz-border-strong: 107 114 128; /* gray-500 */
+    --dbz-text-base: 249 250 251; /* gray-50 */
+    --dbz-text-muted: 156 163 175; /* gray-400 */
+    --dbz-text-subtle: 107 114 128; /* gray-500 */
+    --dbz-primary: 251 191 36; /* amber-400 */
+    --dbz-primary-hover: 245 158 11; /* amber-500 */
+    --dbz-primary-light: 120 53 15; /* amber-900 */
+    --dbz-success: 52 211 153; /* emerald-400 */
+    --dbz-success-fg: 110 231 183; /* emerald-300 */
+    --dbz-success-bg: 2 44 34; /* emerald-950 */
+    --dbz-success-border: 6 95 70; /* emerald-800 */
+    --dbz-warning: 251 191 36; /* amber-400 */
+    --dbz-warning-fg: 252 211 77; /* amber-300 */
+    --dbz-warning-bg: 69 26 3; /* amber-950 */
+    --dbz-warning-border: 146 64 14; /* amber-800 */
+    --dbz-error: 248 113 113; /* red-400 */
+    --dbz-error-fg: 252 165 165; /* red-300 */
+    --dbz-error-bg: 69 10 10; /* red-950 */
+    --dbz-error-border: 153 27 27; /* red-800 */
+    --dbz-info: 96 165 250; /* blue-400 */
+    --dbz-info-fg: 147 197 253; /* blue-300 */
+    --dbz-info-bg: 23 37 84; /* blue-950 */
+    --dbz-info-border: 30 64 175; /* blue-800 */
+    --dbz-accent: 167 139 250; /* violet-400 */
+    --dbz-accent-fg: 196 181 253; /* violet-300 */
+    --dbz-accent-bg: 46 16 101; /* violet-950 */
+    --dbz-accent-border: 91 33 182; /* violet-800 */
+    --dbz-trend-positive: var(--dbz-success-fg);
+    --dbz-trend-negative: var(--dbz-error-fg);
+    --dbz-trend-neutral: var(--dbz-text-muted);
+    --dbz-risk-na: 107 114 128;
+    --dbz-risk-low: 52 211 153;
+    --dbz-risk-med: 251 191 36;
+    --dbz-risk-high: 251 146 60;
+    --dbz-risk-very-high: 248 113 113;
+    --dbz-risk-na-bg: 55 65 81;
+    --dbz-risk-low-bg: 6 78 59;
+    --dbz-risk-med-bg: 120 53 15;
+    --dbz-risk-high-bg: 124 45 18;
+    --dbz-risk-very-high-bg: 127 29 29;
+  }
+}
+
+/* Mappa verso le utility (bg-surface, text-error-fg, bg-success/10, …). inline: le utility
+ * leggono direttamente rgb(var(--dbz-*)), così il valore segue la classe .dark più vicina. */
+@theme inline {
+  --color-primary-50: #fffbeb;
+  --color-primary-100: #fef3c7;
+  --color-primary-200: #fde68a;
+  --color-primary-300: #fcd34d;
+  --color-primary-400: #fbbf24;
+  --color-primary-500: #f59e0b;
+  --color-primary-600: #d97706;
+  --color-primary-700: #b45309;
+  --color-primary-800: #92400e;
+  --color-primary-900: #78350f;
+  --color-primary-950: #451a03;
+  --color-primary: rgb(var(--dbz-primary));
+  --color-primary-hover: rgb(var(--dbz-primary-hover));
+  --color-primary-light: rgb(var(--dbz-primary-light));
+  --color-primary-fg: rgb(var(--dbz-primary-fg));
+  --color-base: rgb(var(--dbz-bg-base));
+  --color-surface: rgb(var(--dbz-bg-surface));
+  --color-subtle: rgb(var(--dbz-bg-subtle));
+  --color-emphasis: rgb(var(--dbz-bg-emphasis));
+  --color-border: rgb(var(--dbz-border));
+  --color-border-strong: rgb(var(--dbz-border-strong));
+  --color-text-base: rgb(var(--dbz-text-base));
+  --color-text-muted: rgb(var(--dbz-text-muted));
+  --color-text-subtle: rgb(var(--dbz-text-subtle));
+  --color-info: rgb(var(--dbz-info));
+  --color-info-fg: rgb(var(--dbz-info-fg));
+  --color-info-bg: rgb(var(--dbz-info-bg));
+  --color-info-border: rgb(var(--dbz-info-border));
+  --color-accent: rgb(var(--dbz-accent));
+  --color-accent-fg: rgb(var(--dbz-accent-fg));
+  --color-accent-bg: rgb(var(--dbz-accent-bg));
+  --color-accent-border: rgb(var(--dbz-accent-border));
+  --color-trend-positive: rgb(var(--dbz-trend-positive));
+  --color-trend-negative: rgb(var(--dbz-trend-negative));
+  --color-trend-neutral: rgb(var(--dbz-trend-neutral));
+  --color-risk-na: rgb(var(--dbz-risk-na));
+  --color-risk-na-bg: rgb(var(--dbz-risk-na-bg));
+  --color-risk-low: rgb(var(--dbz-risk-low));
+  --color-risk-low-bg: rgb(var(--dbz-risk-low-bg));
+  --color-risk-med: rgb(var(--dbz-risk-med));
+  --color-risk-med-bg: rgb(var(--dbz-risk-med-bg));
+  --color-risk-high: rgb(var(--dbz-risk-high));
+  --color-risk-high-bg: rgb(var(--dbz-risk-high-bg));
+  --color-risk-very-high: rgb(var(--dbz-risk-very-high));
+  --color-risk-very-high-bg: rgb(var(--dbz-risk-very-high-bg));
+  --color-databeez-primary: #f59e0b;
+  --color-databeez-secondary: #fcd34d;
+  --color-databeez-accent: #d97706;
+  --color-databeez-dark: #111827;
+  --color-databeez-light: #f9fafb;
+  --color-databeez-success: #10b981;
+  --color-category-top: #f59e0b;
+  --color-category-base: #3b82f6;
+  --color-category-vertical: #10b981;
+  --color-success-50: #ecfdf5;
+  --color-success-500: #10b981;
+  --color-success-900: #064e3b;
+  --color-success: rgb(var(--dbz-success));
+  --color-success-fg: rgb(var(--dbz-success-fg));
+  --color-success-bg: rgb(var(--dbz-success-bg));
+  --color-success-border: rgb(var(--dbz-success-border));
+  --color-warning-50: #fffbeb;
+  --color-warning-500: #f59e0b;
+  --color-warning-900: #78350f;
+  --color-warning: rgb(var(--dbz-warning));
+  --color-warning-fg: rgb(var(--dbz-warning-fg));
+  --color-warning-bg: rgb(var(--dbz-warning-bg));
+  --color-warning-border: rgb(var(--dbz-warning-border));
+  --color-error-50: #fef2f2;
+  --color-error-500: #ef4444;
+  --color-error-900: #7f1d1d;
+  --color-error: rgb(var(--dbz-error));
+  --color-error-fg: rgb(var(--dbz-error-fg));
+  --color-error-bg: rgb(var(--dbz-error-bg));
+  --color-error-border: rgb(var(--dbz-error-border));
+  --shadow-databeez: 0 4px 14px 0 rgba(245, 158, 11, 0.15);
+  --shadow-databeez-lg: 0 10px 25px 0 rgba(245, 158, 11, 0.25);
+  --font-heading: var(--font-inter), system-ui, sans-serif;
+}
