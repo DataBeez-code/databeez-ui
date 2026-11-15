@@ -34,11 +34,16 @@ export interface CompanyHeaderProps extends Omit<React.HTMLAttributes<HTMLElemen
   headingLevel?: "h1" | "h2" | "h3"
 }
 
-function deriveStatoVariant(stato: string): StatusBadgeProps["variant"] {
+/**
+ * Tono dello stato attività, dedotto dal testo: descrizioni o codici di honey.stati_attivita
+ * («Attività in corso», «Attività cessata», «In liquidazione», CESSATA, …).
+ * I casi negativi vanno controllati PRIMA: «Attività cessata» contiene anche «attiv».
+ */
+export function deriveStatoVariant(stato: string): NonNullable<StatusBadgeProps["variant"]> {
   const s = stato.trim().toLowerCase()
-  if (s.startsWith("attiv")) return "success"
-  if (s.startsWith("cessat") || s.startsWith("chius")) return "error"
-  if (s.startsWith("sospes") || s.startsWith("inattiv") || s.startsWith("liquidaz")) return "warning"
+  if (/cessat|chius|falliment/.test(s)) return "error"
+  if (/sospes|inattiv|liquidaz|sciogliment/.test(s)) return "warning"
+  if (/attiv|in corso/.test(s)) return "success"
   return "neutral"
 }
 
@@ -99,12 +104,13 @@ function CompanyHeader({
             <StatusBadge
               label={stato}
               variant={statoVariant ?? deriveStatoVariant(stato)}
-              aria-label={`Stato attività: ${stato}`}
             />
           )}
         </div>
         <p className="text-xs text-text-muted">
-          {subject.label} · {meta.label}
+          {subject.label}
+          {/* Senza sottotipo i metadati ripiegano sull'etichetta del tipo: niente «Organizzazione · Organizzazione» */}
+          {meta.label !== subject.label ? ` · ${meta.label}` : ""}
           {hasForma ? ` · ${formaGiuridica}` : ""}
         </p>
         {hasMeta && (

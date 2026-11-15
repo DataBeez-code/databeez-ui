@@ -71,17 +71,22 @@ const FilterChip = React.forwardRef<HTMLButtonElement, FilterChipProps>(
           className
         )}
       >
-        <button
-          ref={ref}
-          type="button"
-          aria-pressed={active}
-          disabled={disabled}
-          onClick={onClick}
-          className="inline-flex h-full items-center gap-1.5 rounded-l-full pl-3 pr-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          {...props}
-        >
-          {body}
-        </button>
+        {onClick ? (
+          <button
+            ref={ref}
+            type="button"
+            aria-pressed={active}
+            disabled={disabled}
+            onClick={onClick}
+            className="inline-flex h-full items-center gap-1.5 rounded-l-full pl-3 pr-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            {...props}
+          >
+            {body}
+          </button>
+        ) : (
+          // Solo rimovibile: senza onClick un pulsante con aria-pressed non farebbe nulla
+          <span className="inline-flex h-full items-center gap-1.5 pl-3 pr-1.5">{body}</span>
+        )}
         <button
           type="button"
           disabled={disabled}

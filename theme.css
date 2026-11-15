@@ -64,6 +64,11 @@
     --dbz-risk-med-bg: 255 251 235;
     --dbz-risk-high-bg: 255 247 237;
     --dbz-risk-very-high-bg: 254 242 242;
+    --dbz-risk-na-fg: 75 85 99; /* gray-600 */
+    --dbz-risk-low-fg: 4 120 87; /* emerald-700 */
+    --dbz-risk-med-fg: 180 83 9; /* amber-700 */
+    --dbz-risk-high-fg: 194 65 12; /* orange-700 */
+    --dbz-risk-very-high-fg: 185 28 28; /* red-700 */
   }
 
   .dark {
@@ -112,6 +117,11 @@
     --dbz-risk-med-bg: 120 53 15;
     --dbz-risk-high-bg: 124 45 18;
     --dbz-risk-very-high-bg: 127 29 29;
+    --dbz-risk-na-fg: 209 213 219; /* gray-300 */
+    --dbz-risk-low-fg: 110 231 183; /* emerald-300 */
+    --dbz-risk-med-fg: 252 211 77; /* amber-300 */
+    --dbz-risk-high-fg: 253 186 116; /* orange-300 */
+    --dbz-risk-very-high-fg: 252 165 165; /* red-300 */
   }
 
   /* Stili base equivalenti a quelli di globals.css (preset v3). I font restano all'app,
@@ -162,14 +172,19 @@
   --color-trend-neutral: rgb(var(--dbz-trend-neutral));
   --color-risk-na: rgb(var(--dbz-risk-na));
   --color-risk-na-bg: rgb(var(--dbz-risk-na-bg));
+  --color-risk-na-fg: rgb(var(--dbz-risk-na-fg));
   --color-risk-low: rgb(var(--dbz-risk-low));
   --color-risk-low-bg: rgb(var(--dbz-risk-low-bg));
+  --color-risk-low-fg: rgb(var(--dbz-risk-low-fg));
   --color-risk-med: rgb(var(--dbz-risk-med));
   --color-risk-med-bg: rgb(var(--dbz-risk-med-bg));
+  --color-risk-med-fg: rgb(var(--dbz-risk-med-fg));
   --color-risk-high: rgb(var(--dbz-risk-high));
   --color-risk-high-bg: rgb(var(--dbz-risk-high-bg));
+  --color-risk-high-fg: rgb(var(--dbz-risk-high-fg));
   --color-risk-very-high: rgb(var(--dbz-risk-very-high));
   --color-risk-very-high-bg: rgb(var(--dbz-risk-very-high-bg));
+  --color-risk-very-high-fg: rgb(var(--dbz-risk-very-high-fg));
   --color-databeez-primary: #f59e0b;
   --color-databeez-secondary: #fcd34d;
   --color-databeez-accent: #d97706;

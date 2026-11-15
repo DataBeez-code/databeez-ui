@@ -24,7 +24,7 @@ const REGIONI = [
 function Demo(props: Partial<React.ComponentProps<typeof MultiSelect>>) {
   const [value, setValue] = useState<string[]>(props.value ?? [])
   return (
-    <div className="w-80">
+    <div className="w-[20rem]">
       <MultiSelect options={REGIONI} {...props} value={value} onChange={setValue} />
     </div>
   )

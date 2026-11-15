@@ -119,7 +119,7 @@ function Combobox({
           </div>
 
           {/* Options list */}
-          <div className="max-h-60 overflow-y-auto p-1">
+          <div className="max-h-[15rem] overflow-y-auto p-1">
             {filtered.length === 0 ? (
               <div className="py-6 text-center text-sm text-text-muted">
                 {emptyMessage}

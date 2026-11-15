@@ -104,7 +104,7 @@ I componenti usano token semantici Tailwind definiti via `@theme inline` nel CSS
 | `bg-primary`, `text-primary`, `bg-primary-light`, `text-primary-fg` | brand tematizzato light/dark (la scala `primary-50…900` resta) |
 | `success`, `warning`, `error`, `info`, `accent` | toni di stato: `bg-<tono>` pieno (pallini, icone), `text-<tono>-fg`, `bg-<tono>-bg`, `border-<tono>-border` |
 | `text-trend-positive/negative/neutral` | variazioni: buono/cattivo/neutro. La polarità (su = bene o male) la decide il componente |
-| `risk-na/low/med/high/very-high` (+ `-bg`) | livelli di rischio/score, stessi nomi di beemap |
+| `risk-na/low/med/high/very-high` (+ `-bg`, `-fg`) | livelli di rischio/score, stessi nomi di beemap. `text-risk-<livello>` è la tinta piena (pallini, barre); per il testo sul `-bg` usare `text-risk-<livello>-fg` (contrasto AA) |
 | `tabular-nums` (utility Tailwind) | cifre a larghezza fissa nelle colonne numeriche |
 
 I valori stanno in `globals.css` (`:root` e `.dark`, variabili RGB `--color-*`); `tailwind.config.js` li espone come classi. Nei componenti non si usano classi di palette grezze (`gray-500`, `red-600`…) né esadecimali: unica eccezione il tema sempre scuro di CodeBlock; le tinte selezionabili di ColorPicker e i colori del logo sono dati, non stili.

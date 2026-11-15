@@ -17,7 +17,7 @@ const SEZIONI = [
 
 export const Singola: Story = {
   render: () => (
-    <div className="w-96">
+    <div className="w-[24rem]">
       <Accordion type="single" collapsible defaultValue="anagrafica">
         {SEZIONI.map(([v, t, c]) => (
           <AccordionItem key={v} value={v}>
@@ -32,7 +32,7 @@ export const Singola: Story = {
 
 export const Multipla: Story = {
   render: () => (
-    <div className="w-96">
+    <div className="w-[24rem]">
       <Accordion type="multiple" defaultValue={["anagrafica", "bilancio"]}>
         {SEZIONI.map(([v, t, c]) => (
           <AccordionItem key={v} value={v}>
@@ -47,7 +47,7 @@ export const Multipla: Story = {
 
 export const ConVoceDisabilitata: Story = {
   render: () => (
-    <div className="w-96">
+    <div className="w-[24rem]">
       <Accordion type="single" collapsible>
         <AccordionItem value="a">
           <AccordionTrigger>Disponibile</AccordionTrigger>

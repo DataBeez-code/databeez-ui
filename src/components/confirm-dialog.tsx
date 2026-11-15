@@ -12,7 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/dialog"
-import { Spinner } from "@/components/spinner"
+import { Loader2 } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 export interface ConfirmDialogProps {
   /** Controllo esterno. Se omesso, il dialog è non controllato (usare `trigger`). */
@@ -28,9 +30,16 @@ export interface ConfirmDialogProps {
   destructive?: boolean
   /**
    * Eseguita alla conferma. Se restituisce una Promise, il dialog resta aperto con i pulsanti
-   * disabilitati finché non si risolve (poi si chiude); se rigetta resta aperto.
+   * inattivi finché non si risolve (poi si chiude); se lancia o rigetta, il dialog resta aperto
+   * e l'errore va a `onError`.
    */
   onConfirm: () => void | Promise<unknown>
+  /**
+   * Riceve l'errore se `onConfirm` lancia o rigetta (es. per mostrare un toast). Se omessa,
+   * l'errore viene rilanciato in modo asincrono: finisce in console e nei sistemi di
+   * tracciamento invece di sparire in silenzio.
+   */
+  onError?: (error: unknown) => void
 }
 
 function ConfirmDialog({
@@ -43,6 +52,7 @@ function ConfirmDialog({
   cancelLabel = "Annulla",
   destructive = false,
   onConfirm,
+  onError,
 }: ConfirmDialogProps) {
   const [openState, setOpenState] = React.useState(false)
   const [pending, setPending] = React.useState(false)
@@ -63,20 +73,31 @@ function ConfirmDialog({
     onOpenChange?.(next)
   }
 
+  const reportError = (error: unknown) => {
+    if (onError) onError(error)
+    else
+      queueMicrotask(() => {
+        throw error
+      })
+  }
+
   const handleConfirm = async () => {
+    if (pending) return
     let result: void | Promise<unknown>
     try {
       result = onConfirm()
-    } catch {
-      return // errore sincrono: il dialog resta aperto
+    } catch (error) {
+      reportError(error) // errore sincrono: il dialog resta aperto
+      return
     }
     if (result && typeof (result as Promise<unknown>).then === "function") {
       setPending(true)
       try {
         await result
-      } catch {
-        // rigettata: il dialog resta aperto, l'errore va gestito da chi chiama
+      } catch (error) {
+        // rigettata: il dialog resta aperto
         if (mounted.current) setPending(false)
+        reportError(error)
         return
       }
       if (mounted.current) setPending(false)
@@ -94,22 +115,30 @@ function ConfirmDialog({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <DialogFooter className="gap-2 sm:space-x-0">
+          {/* aria-disabled e non disabled: un pulsante disabilitato mentre ha il focus lo
+              cede a <body>, e Radix non lo riporta nel dialog. */}
           <Button
             type="button"
             variant="outline"
-            disabled={pending}
-            onClick={() => setOpen(false)}
+            aria-disabled={pending || undefined}
+            className={cn(pending && "cursor-not-allowed opacity-50")}
+            onClick={() => {
+              if (!pending) setOpen(false)
+            }}
           >
             {cancelLabel}
           </Button>
           <Button
             type="button"
             variant={destructive ? "destructive" : "default"}
-            disabled={pending}
+            aria-disabled={pending || undefined}
             aria-busy={pending || undefined}
+            className={cn(pending && "cursor-not-allowed opacity-75")}
             onClick={handleConfirm}
           >
-            {pending && <Spinner size="sm" label="Operazione in corso..." className="mr-2" />}
+            {/* Icona nel colore del testo del pulsante: visibile su ogni variante */}
+            {pending && <Loader2 aria-hidden="true" className="mr-2 h-4 w-4 animate-spin" />}
+            {pending && <span className="sr-only">Operazione in corso: </span>}
             {confirmLabel}
           </Button>
         </DialogFooter>

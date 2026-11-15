@@ -165,6 +165,7 @@ function MultiSelect({
             aria-expanded={open}
             aria-controls={open ? listId : undefined}
             aria-invalid={error ? true : undefined}
+            aria-describedby={error ? `${id}-error` : helperText ? `${id}-help` : undefined}
             disabled={disabled}
             className={cn(
               "flex h-10 w-full items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-base",
@@ -225,7 +226,7 @@ function MultiSelect({
             role="listbox"
             aria-multiselectable="true"
             aria-label={label ?? placeholder}
-            className="max-h-60 overflow-y-auto p-1"
+            className="max-h-[15rem] overflow-y-auto p-1"
           >
             {filtered.map((option, i) => {
               const isSelected = selected.has(option.value)
@@ -237,6 +238,9 @@ function MultiSelect({
                   aria-selected={isSelected}
                   aria-disabled={option.disabled || undefined}
                   onClick={() => toggle(option)}
+                  // il li non è focalizzabile: senza questo il clic toglie il focus alla ricerca
+                  // e frecce/Invio smettono di funzionare
+                  onMouseDown={(e) => e.preventDefault()}
                   onMouseMove={() => i !== safeIndex && setActiveIndex(i)}
                   className={cn(
                     "flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm text-text-base",
@@ -261,8 +265,16 @@ function MultiSelect({
           )}
         </PopoverContent>
       </Popover>
-      {error && <p className="text-xs text-error-fg">{error}</p>}
-      {helperText && !error && <p className="text-xs text-text-muted">{helperText}</p>}
+      {error && (
+        <p id={`${id}-error`} className="text-xs text-error-fg">
+          {error}
+        </p>
+      )}
+      {helperText && !error && (
+        <p id={`${id}-help`} className="text-xs text-text-muted">
+          {helperText}
+        </p>
+      )}
     </div>
   )
 }

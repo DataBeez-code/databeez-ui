@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Card>
 
 export const Default: Story = {
   render: () => (
-    <Card className="w-80">
+    <Card className="w-[20rem]">
       <CardHeader>
         <CardTitle>Titolo Card</CardTitle>
         <CardDescription>Descrizione opzionale della card.</CardDescription>
@@ -31,7 +31,7 @@ export const Default: Story = {
 
 export const Simple: Story = {
   render: () => (
-    <Card className="w-80 p-6">
+    <Card className="w-[20rem] p-6">
       <p className="text-text-base">Una card semplice senza subcomponenti.</p>
     </Card>
   ),

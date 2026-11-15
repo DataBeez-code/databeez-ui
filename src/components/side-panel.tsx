@@ -42,6 +42,15 @@ function SidePanel({
     clampWidth(defaultWidth ?? width, minWidth, maxWidth)
   )
   const dragStart = React.useRef<{ x: number; width: number } | null>(null)
+  const generatedId = React.useId()
+  const panelId = props.id ?? generatedId
+
+  // La larghezza iniziale può arrivare dopo il mount (es. preferenza letta in modo asincrono):
+  // quando l'app cambia defaultWidth/width, il pannello si riallinea.
+  const initialWidth = defaultWidth ?? width
+  React.useEffect(() => {
+    setDragWidth(clampWidth(initialWidth, minWidth, maxWidth))
+  }, [initialWidth, minWidth, maxWidth])
 
   if (!open) return null
 
@@ -69,9 +78,12 @@ function SidePanel({
         className
       )}
       {...props}
+      // id solo quando serve alla maniglia: senza resizable il markup resta quello di prima
+      id={resizable ? panelId : props.id}
     >
       {/* Close button */}
       <button
+        type="button"
         onClick={onClose}
         className="absolute top-3 right-3 z-10 rounded-md p-1.5 text-text-muted hover:text-text-base hover:bg-subtle transition-colors"
         aria-label="Chiudi pannello"
@@ -102,6 +114,7 @@ function SidePanel({
         role="separator"
         aria-orientation="vertical"
         aria-label="Ridimensiona pannello"
+        aria-controls={panelId}
         aria-valuenow={currentWidth}
         aria-valuemin={minWidth}
         aria-valuemax={maxWidth}

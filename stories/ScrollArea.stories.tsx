@@ -26,7 +26,7 @@ export const Verticale: Story = {
 
 export const Orizzontale: Story = {
   render: () => (
-    <ScrollArea className="w-80 rounded-lg border border-border bg-surface">
+    <ScrollArea className="w-[20rem] rounded-lg border border-border bg-surface">
       <div className="flex gap-3 p-3 w-max text-sm text-text-base">
         {comuni.map((c) => (
           <span key={c} className="px-3 py-1.5 rounded-md bg-subtle">{c}</span>

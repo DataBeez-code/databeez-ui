@@ -106,6 +106,8 @@ module.exports = {
           ['na', 'low', 'med', 'high', 'very-high'].flatMap((level) => [
             [level, token(`risk-${level}`)],
             [`${level}-bg`, token(`risk-${level}-bg`)],
+            // testo sul -bg con contrasto AA (text-risk-<livello> è la tinta piena, per pallini e barre)
+            [`${level}-fg`, token(`risk-${level}-fg`)],
           ])
         ),
 

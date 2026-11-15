@@ -64,6 +64,12 @@
     --color-risk-med-bg: 255 251 235;
     --color-risk-high-bg: 255 247 237;
     --color-risk-very-high-bg: 254 242 242;
+    /* Testo sul proprio -bg con contrasto AA (le tinte piene sopra sono per pallini e barre) */
+    --color-risk-na-fg: 75 85 99;        /* gray-600 */
+    --color-risk-low-fg: 4 120 87;       /* emerald-700 */
+    --color-risk-med-fg: 180 83 9;       /* amber-700 */
+    --color-risk-high-fg: 194 65 12;     /* orange-700 */
+    --color-risk-very-high-fg: 185 28 28; /* red-700 */
   }
 
   /* ── Dark Mode Tokens ─────────────────────────────── */
@@ -121,6 +127,11 @@
     --color-risk-med-bg: 120 53 15;
     --color-risk-high-bg: 124 45 18;
     --color-risk-very-high-bg: 127 29 29;
+    --color-risk-na-fg: 209 213 219;     /* gray-300 */
+    --color-risk-low-fg: 110 231 183;    /* emerald-300 */
+    --color-risk-med-fg: 252 211 77;     /* amber-300 */
+    --color-risk-high-fg: 253 186 116;   /* orange-300 */
+    --color-risk-very-high-fg: 252 165 165; /* red-300 */
   }
 
   html {

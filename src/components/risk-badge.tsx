@@ -46,11 +46,11 @@ export const RISK_LEVEL_LABELS: Record<RiskLevel, string> = {
 }
 
 const LEVEL_CLASSES: Record<RiskLevel, string> = {
-  na: "text-risk-na bg-risk-na-bg",
-  low: "text-risk-low bg-risk-low-bg",
-  med: "text-risk-med bg-risk-med-bg",
-  high: "text-risk-high bg-risk-high-bg",
-  "very-high": "text-risk-very-high bg-risk-very-high-bg",
+  na: "text-risk-na-fg bg-risk-na-bg",
+  low: "text-risk-low-fg bg-risk-low-bg",
+  med: "text-risk-med-fg bg-risk-med-bg",
+  high: "text-risk-high-fg bg-risk-high-bg",
+  "very-high": "text-risk-very-high-fg bg-risk-very-high-bg",
 }
 
 export interface RiskBadgeProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {

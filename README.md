@@ -414,11 +414,12 @@ dismissToast(id)                        // senza id chiude tutti
   description="L'operazione non si può annullare."
   confirmLabel="Elimina"      // default "Conferma"; cancelLabel default "Annulla"
   destructive
-  onConfirm={() => api.delete(id)}   // se restituisce una Promise: attesa con Spinner; se rigetta resta aperto
+  onConfirm={() => api.delete(id)}   // se restituisce una Promise: attesa con indicatore; se rigetta resta aperto
+  onError={(e) => toast.error("Eliminazione non riuscita")}  // opzionale
 />
 ```
 
-Controllabile con `open` / `onOpenChange` (senza `trigger`).
+Controllabile con `open` / `onOpenChange` (senza `trigger`). Se `onConfirm` lancia o rigetta, il dialog resta aperto e l'errore va a `onError`; senza `onError` viene rilanciato (finisce in console e nei sistemi di tracciamento, non sparisce in silenzio).
 
 ---
 
