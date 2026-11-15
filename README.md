@@ -123,6 +123,35 @@ formatEuro(null)                           // "—"
 - La forma compatta (`compact: true`) è **opt-in** e si usa **solo in KPI e card**. Nelle colonne numeriche si usa sempre la forma piena con decimali uniformi, così le cifre si allineano a destra.
 - Le date accettano `string | Date`; le stringhe `AAAA-MM-GG` sono lette come data locale (nessuno slittamento di fuso).
 
+## Table: colonne numeriche, ordinamento, paginazione
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableSortHead, TableCell, Pagination, formatEuro } from "@databeez-code/ui"
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Causale</TableHead>
+      <TableSortHead numeric direction={dir /* "asc" | "desc" | null */} onSort={toggleSort}>Importo</TableSortHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {rows.map((r) => (
+      <TableRow key={r.id}>
+        <TableCell>{r.causale}</TableCell>
+        <TableCell numeric>{formatEuro(r.importo)}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+<Pagination page={page} pageCount={getPageCount(total, 20)} onPageChange={setPage} totalItems={total} />
+```
+
+- `numeric` (su `TableHead`, `TableCell`, `TableSortHead`): `text-right tabular-nums whitespace-nowrap`.
+- `TableSortHead`: `aria-sort` sul `<th>`, contenuto in un `<button>` (tastiera), icona di direzione. L'ordinamento dei dati lo fa l'app.
+- `Pagination`: `nav` con «Pagina X di N», pulsanti precedente/successiva disabilitati ai bordi, `totalItems` opzionale («1.234 risultati»). `getPageCount` e `clampPage` sono helper puri.
+- **Regola importi**: nelle colonne si usa sempre la forma piena di `formatEuro` (mai `compact`) con decimali uniformi nella colonna (tutti con `cents` o tutti senza).
+
 ### Test
 
 ```bash

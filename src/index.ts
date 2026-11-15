@@ -43,6 +43,7 @@ export * from './components/status-badge'
 export * from './components/status-indicator-row'
 export * from './components/tab-switch'
 export * from './components/table'
+export * from './components/pagination'
 export * from './components/tabs'
 export * from './components/textarea'
 export * from './components/time-picker'
@@ -56,6 +57,7 @@ export * from './hooks/useAsyncData'
 // Utilities
 export * from './lib/utils'
 export * from './lib/format'
+export * from './lib/pagination'
 
 // Entities
 export * from './entities'
