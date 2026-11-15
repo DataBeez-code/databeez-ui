@@ -29,7 +29,7 @@ const Pagination = React.forwardRef<HTMLElement, PaginationProps>(
         className={cn("flex items-center justify-between gap-4 text-sm text-text-muted", className)}
         {...props}
       >
-        <span>{totalItems !== undefined ? `${formatNumber(totalItems)} risultati` : null}</span>
+        <span>{totalItems !== undefined ? `${formatNumber(totalItems)} ${totalItems === 1 ? "risultato" : "risultati"}` : null}</span>
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
