@@ -18,6 +18,13 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
 
   viteFinal(config) {
+    // vite.config.ts serve anche a costruire il pacchetto e include vite-plugin-dts:
+    // dentro Storybook riscriverebbe i .d.ts di dist/ (con import rotti verso
+    // node_modules), cioè i file che le app installano. Qui non serve: lo togliamo.
+    config.plugins = (config.plugins ?? [])
+      .flat()
+      .filter((p) => !(p && typeof p === "object" && "name" in p && p.name === "vite:dts"))
+
     // Storybook's MDX plugin uses import.meta.resolve() which returns file:// URLs
     // on Windows. Vite's import-analysis plugin cannot resolve these. Rewrite them
     // to plain filesystem paths so Vite can handle them.

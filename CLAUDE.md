@@ -6,11 +6,13 @@ Pubblicata come pacchetto GitHub (`github:DataBeez-code/databeez-ui#vX.Y.Z`).
 ## Comandi di sviluppo
 
 ```bash
-npm run dev        # build watch (Vite library mode)
-npm run build      # build produzione in dist/
-npm run storybook  # documentazione interattiva su http://localhost:6006
-npm run lint       # type-check TypeScript
+npm run build            # build produzione in dist/ (Vite library mode + .d.ts)
+npm run storybook        # documentazione interattiva su http://localhost:6006
+npm run build-storybook  # Storybook statico in storybook-static/ (non tocca dist/)
+npx tsc --noEmit         # type-check TypeScript
 ```
+
+Toolchain: Vite 7 (richiede Node ^20.19 o ≥ 22.12), Storybook 10.6. Ogni push su `main` ripubblica Storybook su https://ui.databeez.ai.
 
 ## Pubblicare una nuova versione
 
@@ -102,10 +104,17 @@ Ogni app consumatrice deve dichiarare questi token nel proprio CSS globale. Vedi
 
 ## App consumatrici e versione corrente
 
-| App | Versione in uso |
-|-----|----------------|
-| BeeMap | `v0.4.4` |
-| BeeGraph | `v0.4.4` |
-| BeeScout | `v0.4.4` |
-| Haive (frontend) | `v0.4.4` |
-| Swarm | da verificare |
+Rilevato il 2026-11-15 dai `package.json` delle app:
+
+| App | Percorso | Versione in uso |
+|-----|----------|----------------|
+| BeeGraph | `beegraph` | `v0.7.1` |
+| BeeMap | `beemap` | `v0.5.0` |
+| Data Alveus | `data-alveus/frontend` | `v0.5.0` |
+| Bumblebee | `bumblebee/src/frontend` | `v0.4.5` |
+| Swarm | `databeez-swarm/src/frontend` | `v0.4.5` |
+| Haive | `databeez-haive/frontend` | `v0.4.4` |
+| BeeScout | `beescout` | `v0.4.4` |
+
+abbrevia-portal non usa la libreria e resta fuori dal design system: ha uno stile proprio.
+Piano di allineamento: epic TASK-888 nel backlog (milestone «PROD - DESIGN SYSTEM»).

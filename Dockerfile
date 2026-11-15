@@ -1,4 +1,4 @@
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 WORKDIR /app
 ARG GH_PAT
 RUN echo "@databeez-code:registry=https://npm.pkg.github.com" > .npmrc && \
@@ -6,7 +6,7 @@ RUN echo "@databeez-code:registry=https://npm.pkg.github.com" > .npmrc && \
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps && rm -f .npmrc
 
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

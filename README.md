@@ -15,7 +15,7 @@ Aggiungi nel `package.json` del progetto consumatore:
 ```json
 {
   "dependencies": {
-    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.4.4"
+    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.7.1"
   }
 }
 ```
