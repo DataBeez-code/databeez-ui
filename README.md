@@ -115,9 +115,9 @@ export default function RootLayout({ children }) {
 | **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select` |
 | **Display** | `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `Spinner` |
 | **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs` |
-| **Feedback** | `Alert`, `EmptyState`, `Skeleton` |
+| **Feedback** | `Alert`, `EmptyState`, `Skeleton`, `Toaster`/`toast`, `Tooltip`, `ConfirmDialog` |
 | **Content** | `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` |
-| **System** | `Table`, `Dialog`, `StatusIndicatorRow`, `ThemeProvider` |
+| **System** | `Table`, `Dialog`, `DropdownMenu`, `StatusIndicatorRow`, `ThemeProvider` |
 | **App Shell** | `UserMenu`, `ThemeSwitcher` |
 
 ---
@@ -305,6 +305,66 @@ Nessuna prop richiesta. Legge e aggiorna il tema tramite `useTheme()` del `Theme
 
 ---
 
+## Tooltip, Toast, DropdownMenu, ConfirmDialog
+
+### Tooltip
+
+```tsx
+<Tooltip content="Elimina azienda">
+  <button type="button" aria-label="Elimina azienda"><Trash2 /></button>
+</Tooltip>
+```
+
+Si apre in hover e al focus da tastiera, si chiude con Esc. Per i casi avanzati: `TooltipProvider`, `TooltipRoot`, `TooltipTrigger`, `TooltipContent`.
+
+### Toast
+
+Montare `<Toaster />` una sola volta nel layout root, poi da qualsiasi punto (anche fuori da React):
+
+```tsx
+toast.success("Richiesta inviata", {
+  description: "Ti avviseremo in app.",
+  duration: 8000,                       // ms; null = non si chiude da solo (default 5000)
+  action: { label: "Annulla", onClick: undo },
+})
+toast({ title: "Salvato" })             // neutro; toast.error / warning / info
+dismissToast(id)                        // senza id chiude tutti
+```
+
+`useToast()` restituisce `{ toasts, toast, dismiss }`. Errori e avvisi sono annunciati subito ai lettori di schermo, il resto in modo cortese. Un `id` esplicito sostituisce il toast con lo stesso id.
+
+### DropdownMenu
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild><Button type="button" variant="outline">Azioni</Button></DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuLabel>Lista</DropdownMenuLabel>
+    <DropdownMenuItem onSelect={rename}>Rinomina</DropdownMenuItem>
+    <DropdownMenuItem disabled>Esporta</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem destructive onSelect={remove}>Elimina</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### ConfirmDialog
+
+```tsx
+<ConfirmDialog
+  trigger={<Button type="button" variant="destructive">Elimina</Button>}
+  title="Eliminare la lista?"
+  description="L'operazione non si può annullare."
+  confirmLabel="Elimina"      // default "Conferma"; cancelLabel default "Annulla"
+  destructive
+  onConfirm={() => api.delete(id)}   // se restituisce una Promise: attesa con Spinner; se rigetta resta aperto
+/>
+```
+
+Controllabile con `open` / `onOpenChange` (senza `trigger`).
+
+---
+
 ## Storybook
 
 ```bash
@@ -322,6 +382,6 @@ Apre la documentazione interattiva su `http://localhost:6006` con esempi e props
 | Framework | React 18 |
 | Stili | Tailwind CSS 3 + CSS Variables |
 | Varianti | Class Variance Authority (CVA) |
-| Primitivi accessibili | Radix UI (Dialog, Select, Tabs) |
+| Primitivi accessibili | Radix UI (Dialog, Select, Tabs, Tooltip, Toast, DropdownMenu) |
 | Icone | Lucide React |
 | Evidenziazione codice | react-syntax-highlighter |
