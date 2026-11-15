@@ -63,7 +63,7 @@ function Delta({
   value,
   polarity = "up-is-good",
   threshold = 0,
-  format = formatDelta,
+  format,
   suffix = "",
   size = "sm",
   className,
@@ -83,7 +83,11 @@ function Delta({
     )
   }
 
-  const { direction, tone } = getDeltaState(value, polarity, threshold)
+  // Col formato di default (formatDelta, 0 decimali) un valore sotto 0,5 si legge «0»:
+  // freccia e colore devono dire «invariato», non «in aumento».
+  const effectiveThreshold = format ? threshold : Math.max(threshold, Math.abs(value) < 0.5 ? Math.abs(value) : 0)
+  const { direction, tone } = getDeltaState(value, polarity, effectiveThreshold)
+  const formatValue = format ?? ((v: number) => formatDelta(v))
   const Icon = DIRECTION_ICON[direction]
   const iconSize = size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5"
 
@@ -92,7 +96,7 @@ function Delta({
       <Icon className={iconSize} aria-hidden="true" />
       <span className="sr-only">{DIRECTION_LABEL[direction]}: </span>
       <span>
-        {format(value)}
+        {formatValue(value)}
         {suffix}
       </span>
     </span>
