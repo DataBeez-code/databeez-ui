@@ -113,12 +113,38 @@ export default function RootLayout({ children }) {
 | Categoria | Componenti |
 |-----------|-----------|
 | **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select` |
-| **Display** | `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `Spinner` |
+| **Display** | `Button`, `Badge`, `StatusBadge`, `RiskBadge`, `MethodBadge`, `Spinner` |
 | **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs` |
 | **Feedback** | `Alert`, `EmptyState`, `Skeleton`, `Toaster`/`toast`, `Tooltip`, `ConfirmDialog` |
-| **Content** | `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` |
+| **Content** | `CodeBlock`, `CompanyHeader`, `CopyButton`, `FeatureCard`, `StatCard` |
 | **System** | `Table`, `Dialog`, `DropdownMenu`, `StatusIndicatorRow`, `ThemeProvider` |
 | **App Shell** | `UserMenu`, `ThemeSwitcher` |
+
+---
+
+## RiskBadge e CompanyHeader
+
+### RiskBadge
+
+Livello su scala a bande con i token `risk-*` (light e dark). Mostra un livello (`na | low | med | high | very-high`) con etichetta testuale italiana («Basso», «Medio», «Alto», «Molto alto», «n.d.», sovrascrivibili con `labels`) e `aria-label`; il valore numerico è opzionale (`value`). La mappatura valore→banda è **a carico dell'app**: l'helper puro `riskLevelFromScore` prende tre soglie in ordine crescente (ogni soglia appartiene alla banda superiore); `higherIsRiskier: false` inverte le bande per i punteggi «più alto = meglio». `null`/`NaN` o soglie non valide danno `na`.
+
+```tsx
+const level = riskLevelFromScore(score, [30, 60, 80])                           // alto = più rischio
+const inv = riskLevelFromScore(score, [30, 60, 80], { higherIsRiskier: false }) // alto = meglio
+<RiskBadge level={level} value={score} subject="Score" labels={{ "very-high": "Critico" }} />
+```
+
+### CompanyHeader
+
+Intestazione presentazionale (nessun fetch) per organizzazioni e persone: icona ed etichetta del tipo da `entities` (`tipoSoggetto` `"O"`/`"P"` + `sottotipo`), titolo, stato attività (testo + tono: attiva verde, cessata rossa, sospesa/liquidazione gialla; `statoVariant` per forzarlo), CF e P.IVA in mono con copia, ATECO, forma giuridica, sede. I campi assenti o vuoti sono omessi. Lo slot `actions` ospita badge o azioni a destra.
+
+```tsx
+<CompanyHeader
+  tipoSoggetto="O" sottotipo="S" nome="Esempio Costruzioni S.r.l."
+  partitaIva="00000000000" ateco={{ codice: "41.20.00", descrizione: "Costruzione di edifici" }}
+  stato="Attiva" actions={<RiskBadge level="med" />}
+/>
+```
 
 ---
 
