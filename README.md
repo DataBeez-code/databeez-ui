@@ -113,11 +113,11 @@ export default function RootLayout({ children }) {
 | Categoria | Componenti |
 |-----------|-----------|
 | **Form** | `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select`, `MultiSelect`, `FilterChip` |
-| **Display** | `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `Spinner` |
+| **Display** | `Button`, `Badge`, `StatusBadge`, `RiskBadge`, `MethodBadge`, `Spinner` |
 | **Layout** | `Card`, `PageHeader`, `Stepper`, `TabSwitch`, `Tabs`, `Accordion`, `SidePanel` |
-| **Feedback** | `Alert`, `EmptyState`, `Skeleton` |
-| **Content** | `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` |
-| **System** | `Table`, `Dialog`, `StatusIndicatorRow`, `ThemeProvider` |
+| **Feedback** | `Alert`, `EmptyState`, `Skeleton`, `Toaster`/`toast`, `Tooltip`, `ConfirmDialog` |
+| **Content** | `CodeBlock`, `CompanyHeader`, `CopyButton`, `FeatureCard`, `StatCard` |
+| **System** | `Table`, `Dialog`, `DropdownMenu`, `StatusIndicatorRow`, `ThemeProvider` |
 | **App Shell** | `UserMenu`, `ThemeSwitcher` |
 
 ---
@@ -152,6 +152,30 @@ export default function RootLayout({ children }) {
 - `MultiSelect`: stessa API di `Combobox` (`options`, `label`, `error`, `helperText`) ma con `value: string[]`. Tastiera: frecce nella lista, Invio seleziona/deseleziona, Esc chiude.
 - `SidePanel`: senza `resizable` markup e comportamento non cambiano. Con `resizable` compare una maniglia (`role="separator"`) sul bordo sinistro: trascinamento, frecce (Maiusc = passo x5), Home/End. La persistenza della larghezza è a carico dell'app tramite `onWidthChange`. Le funzioni pure (`clampWidth`, `widthAfterDrag`, `widthAfterKey`) sono esportate.
 - `Accordion` si basa su `@radix-ui/react-accordion`; l'animazione usa `grid-template-rows`, senza plugin.
+
+## RiskBadge e CompanyHeader
+
+### RiskBadge
+
+Livello su scala a bande con i token `risk-*` (light e dark). Mostra un livello (`na | low | med | high | very-high`) con etichetta testuale italiana («Basso», «Medio», «Alto», «Molto alto», «n.d.», sovrascrivibili con `labels`) e `aria-label`; il valore numerico è opzionale (`value`). La mappatura valore→banda è **a carico dell'app**: l'helper puro `riskLevelFromScore` prende tre soglie in ordine crescente (ogni soglia appartiene alla banda superiore); `higherIsRiskier: false` inverte le bande per i punteggi «più alto = meglio». `null`/`NaN` o soglie non valide danno `na`.
+
+```tsx
+const level = riskLevelFromScore(score, [30, 60, 80])                           // alto = più rischio
+const inv = riskLevelFromScore(score, [30, 60, 80], { higherIsRiskier: false }) // alto = meglio
+<RiskBadge level={level} value={score} subject="Score" labels={{ "very-high": "Critico" }} />
+```
+
+### CompanyHeader
+
+Intestazione presentazionale (nessun fetch) per organizzazioni e persone: icona ed etichetta del tipo da `entities` (`tipoSoggetto` `"O"`/`"P"` + `sottotipo`), titolo, stato attività (testo + tono: attiva verde, cessata rossa, sospesa/liquidazione gialla; `statoVariant` per forzarlo), CF e P.IVA in mono con copia, ATECO, forma giuridica, sede. I campi assenti o vuoti sono omessi. Lo slot `actions` ospita badge o azioni a destra.
+
+```tsx
+<CompanyHeader
+  tipoSoggetto="O" sottotipo="S" nome="Esempio Costruzioni S.r.l."
+  partitaIva="00000000000" ateco={{ codice: "41.20.00", descrizione: "Costruzione di edifici" }}
+  stato="Attiva" actions={<RiskBadge level="med" />}
+/>
+```
 
 ---
 
@@ -338,6 +362,66 @@ Nessuna prop richiesta. Legge e aggiorna il tema tramite `useTheme()` del `Theme
 
 ---
 
+## Tooltip, Toast, DropdownMenu, ConfirmDialog
+
+### Tooltip
+
+```tsx
+<Tooltip content="Elimina azienda">
+  <button type="button" aria-label="Elimina azienda"><Trash2 /></button>
+</Tooltip>
+```
+
+Si apre in hover e al focus da tastiera, si chiude con Esc. Per i casi avanzati: `TooltipProvider`, `TooltipRoot`, `TooltipTrigger`, `TooltipContent`.
+
+### Toast
+
+Montare `<Toaster />` una sola volta nel layout root, poi da qualsiasi punto (anche fuori da React):
+
+```tsx
+toast.success("Richiesta inviata", {
+  description: "Ti avviseremo in app.",
+  duration: 8000,                       // ms; null = non si chiude da solo (default 5000)
+  action: { label: "Annulla", onClick: undo },
+})
+toast({ title: "Salvato" })             // neutro; toast.error / warning / info
+dismissToast(id)                        // senza id chiude tutti
+```
+
+`useToast()` restituisce `{ toasts, toast, dismiss }`. Errori e avvisi sono annunciati subito ai lettori di schermo, il resto in modo cortese. Un `id` esplicito sostituisce il toast con lo stesso id.
+
+### DropdownMenu
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild><Button type="button" variant="outline">Azioni</Button></DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuLabel>Lista</DropdownMenuLabel>
+    <DropdownMenuItem onSelect={rename}>Rinomina</DropdownMenuItem>
+    <DropdownMenuItem disabled>Esporta</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem destructive onSelect={remove}>Elimina</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### ConfirmDialog
+
+```tsx
+<ConfirmDialog
+  trigger={<Button type="button" variant="destructive">Elimina</Button>}
+  title="Eliminare la lista?"
+  description="L'operazione non si può annullare."
+  confirmLabel="Elimina"      // default "Conferma"; cancelLabel default "Annulla"
+  destructive
+  onConfirm={() => api.delete(id)}   // se restituisce una Promise: attesa con Spinner; se rigetta resta aperto
+/>
+```
+
+Controllabile con `open` / `onOpenChange` (senza `trigger`).
+
+---
+
 ## Storybook
 
 ```bash
@@ -355,6 +439,6 @@ Apre la documentazione interattiva su `http://localhost:6006` con esempi e props
 | Framework | React 18 |
 | Stili | Tailwind CSS 3 + CSS Variables |
 | Varianti | Class Variance Authority (CVA) |
-| Primitivi accessibili | Radix UI (Dialog, Select, Tabs) |
+| Primitivi accessibili | Radix UI (Dialog, Select, Tabs, Tooltip, Toast, DropdownMenu) |
 | Icone | Lucide React |
 | Evidenziazione codice | react-syntax-highlighter |
