@@ -32,7 +32,7 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
         week: "flex w-full mt-1",
         day: "h-9 w-9 text-center text-sm relative flex items-center justify-center rounded-md transition-colors hover:bg-subtle focus-within:relative focus-within:z-20",
         day_button: "h-9 w-9 rounded-md text-sm font-normal aria-selected:opacity-100 cursor-pointer",
-        selected: "bg-databeez-primary text-white hover:bg-databeez-primary hover:text-white focus:bg-databeez-primary focus:text-white rounded-md",
+        selected: "bg-primary text-primary-fg hover:bg-primary hover:text-primary-fg focus:bg-primary focus:text-primary-fg rounded-md",
         today: "bg-subtle text-text-base font-semibold",
         outside: "text-text-muted opacity-50",
         disabled: "text-text-muted opacity-50 cursor-not-allowed",

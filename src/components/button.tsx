@@ -10,9 +10,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-databeez-primary text-white hover:bg-databeez-accent shadow-sm",
+          // Testo scuro sull'ambra del tema: il bianco su ambra 500 era a 2,2:1 (TASK-896)
+          "bg-primary text-primary-fg hover:bg-primary-hover shadow-sm",
         destructive:
-          "bg-error-500 text-white hover:bg-error-500/90 shadow-sm",
+          "bg-error-600 text-white hover:bg-error-700 shadow-sm",
         outline:
           "border border-border bg-surface text-text-base hover:bg-subtle hover:text-text-base",
         secondary:

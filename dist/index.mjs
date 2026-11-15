@@ -4718,8 +4718,11 @@ const _x = fn(
   {
     variants: {
       variant: {
-        default: "bg-databeez-primary text-white hover:bg-databeez-accent shadow-sm",
-        destructive: "bg-error-500 text-white hover:bg-error-500/90 shadow-sm",
+        default: (
+          // Testo scuro sull'ambra del tema: il bianco su ambra 500 era a 2,2:1 (TASK-896)
+          "bg-primary text-primary-fg hover:bg-primary-hover shadow-sm"
+        ),
+        destructive: "bg-error-600 text-white hover:bg-error-700 shadow-sm",
         outline: "border border-border bg-surface text-text-base hover:bg-subtle hover:text-text-base",
         secondary: "bg-subtle text-text-base hover:bg-subtle/80",
         ghost: "text-text-base hover:bg-subtle hover:text-text-base",
@@ -12262,7 +12265,7 @@ function Ua({ className: e, classNames: t, ...n }) {
         week: "flex w-full mt-1",
         day: "h-9 w-9 text-center text-sm relative flex items-center justify-center rounded-md transition-colors hover:bg-subtle focus-within:relative focus-within:z-20",
         day_button: "h-9 w-9 rounded-md text-sm font-normal aria-selected:opacity-100 cursor-pointer",
-        selected: "bg-databeez-primary text-white hover:bg-databeez-primary hover:text-white focus:bg-databeez-primary focus:text-white rounded-md",
+        selected: "bg-primary text-primary-fg hover:bg-primary hover:text-primary-fg focus:bg-primary focus:text-primary-fg rounded-md",
         today: "bg-subtle text-text-base font-semibold",
         outside: "text-text-muted opacity-50",
         disabled: "text-text-muted opacity-50 cursor-not-allowed",
@@ -14917,7 +14920,7 @@ function $I({
           {
             className: I(
               "rounded-2xl px-4 py-3 text-sm leading-relaxed",
-              a ? "bg-databeez-primary text-white rounded-tr-sm" : "bg-surface border border-border text-text-base rounded-tl-sm"
+              a ? "bg-primary text-primary-fg rounded-tr-sm" : "bg-surface border border-border text-text-base rounded-tl-sm"
             ),
             children: a ? /* @__PURE__ */ f("p", { className: "whitespace-pre-wrap", children: e }) : s ?? /* @__PURE__ */ f("p", { className: "whitespace-pre-wrap", children: e })
           }
@@ -17463,8 +17466,8 @@ const LT = fn(
   {
     variants: {
       state: {
-        completed: "bg-databeez-primary text-white",
-        active: "bg-databeez-primary text-white",
+        completed: "bg-primary text-primary-fg",
+        active: "bg-primary text-primary-fg",
         upcoming: "bg-emphasis text-text-muted"
       }
     },

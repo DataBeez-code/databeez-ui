@@ -45,7 +45,7 @@ function MessageBubble({
           className={cn(
             "rounded-2xl px-4 py-3 text-sm leading-relaxed",
             isUser
-              ? "bg-databeez-primary text-white rounded-tr-sm"
+              ? "bg-primary text-primary-fg rounded-tr-sm"
               : "bg-surface border border-border text-text-base rounded-tl-sm"
           )}
         >

@@ -210,6 +210,8 @@
   --color-warning-border: rgb(var(--dbz-warning-border));
   --color-error-50: #fef2f2;
   --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
   --color-error-900: #7f1d1d;
   --color-error: rgb(var(--dbz-error));
   --color-error-fg: rgb(var(--dbz-error-fg));

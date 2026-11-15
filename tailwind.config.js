@@ -141,6 +141,8 @@ module.exports = {
           ...statusTone('error'),
           50: '#fef2f2',
           500: '#ef4444',
+          600: '#dc2626', // pulsante destructive: testo bianco a 4,8:1 (AA)
+          700: '#b91c1c', // hover del pulsante destructive
           900: '#7f1d1d',
         },
       },

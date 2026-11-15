@@ -156,11 +156,11 @@
   }
 
   .btn-databeez-primary {
-    @apply btn-databeez bg-primary-500 hover:bg-primary-600 text-white shadow-databeez hover:shadow-databeez-lg;
+    @apply btn-databeez bg-primary-500 hover:bg-primary-600 text-primary-fg shadow-databeez hover:shadow-databeez-lg;
   }
 
   .btn-databeez-secondary {
-    @apply btn-databeez bg-surface border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white;
+    @apply btn-databeez bg-surface border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-primary-fg;
   }
 
   .btn-databeez-accent {

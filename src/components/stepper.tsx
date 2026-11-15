@@ -13,8 +13,8 @@ const stepCircleVariants = cva(
   {
     variants: {
       state: {
-        completed: "bg-databeez-primary text-white",
-        active: "bg-databeez-primary text-white",
+        completed: "bg-primary text-primary-fg",
+        active: "bg-primary text-primary-fg",
         upcoming: "bg-emphasis text-text-muted",
       },
     },
