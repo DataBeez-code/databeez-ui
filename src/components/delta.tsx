@@ -94,7 +94,11 @@ function Delta({
   return (
     <span className={cn(base, TONE_CLASS[tone])} {...props}>
       <Icon className={iconSize} aria-hidden="true" />
-      <span className="sr-only">{DIRECTION_LABEL[direction]}: </span>
+      {/* Il colore da solo non basta: con up-is-bad un aumento è un peggioramento */}
+      <span className="sr-only">
+        {DIRECTION_LABEL[direction]}
+        {tone === "positive" ? ", positivo" : tone === "negative" ? ", negativo" : ""}:{" "}
+      </span>
       <span>
         {formatValue(value)}
         {suffix}

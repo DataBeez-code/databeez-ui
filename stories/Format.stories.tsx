@@ -30,7 +30,7 @@ function Rows({ rows }: { rows: [string, string][] }) {
   return (
     <table className="text-sm">
       <thead>
-        <tr className="text-left text-gray-500">
+        <tr className="text-left text-text-muted">
           <th className="pr-8 pb-2 font-medium">Chiamata</th>
           <th className="pb-2 font-medium">Risultato</th>
         </tr>
@@ -102,7 +102,7 @@ export const ColonneVsKpi: Story = {
       <div className="flex gap-12 items-start">
         <table className="text-sm">
           <thead>
-            <tr><th className="text-right pb-2 font-medium text-gray-500">Colonna (piena)</th></tr>
+            <tr><th className="text-right pb-2 font-medium text-text-muted">Colonna (piena)</th></tr>
           </thead>
           <tbody>
             {values.map((v) => (
@@ -111,7 +111,7 @@ export const ColonneVsKpi: Story = {
           </tbody>
         </table>
         <div className="rounded-lg border p-4">
-          <div className="text-xs text-gray-500">Patrimonio (KPI)</div>
+          <div className="text-xs text-text-muted">Patrimonio (KPI)</div>
           <div className="text-2xl font-semibold">{formatEuro(14_200_000, { compact: true })}</div>
         </div>
       </div>

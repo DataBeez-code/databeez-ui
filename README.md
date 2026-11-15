@@ -76,6 +76,8 @@ Le app su Tailwind v4 non usano il preset: importano `theme.css`, generato dagli
 
 Basta questo: il file include `@source` verso i componenti della libreria, `@custom-variant dark` per la dark mode a classe (`.dark` su `<html>` o su un contenitore, con `ThemeProvider` e `THEME_ANTI_FOUC_SCRIPT` come sotto) e tutti i colori come utility (`bg-surface`, `text-text-muted`, `bg-success-bg`, `text-error-fg`, `bg-risk-low-bg`, `bg-success/10`, ...), più `shadow-databeez`, `shadow-databeez-lg` e `font-heading`. Non ridefinisce spaziature, raggi, ombre standard e breakpoint (restano quelli di v4) e non include la scala `gray-*` (resta quella di v4).
 
+**Stili base.** Come `globals.css` del preset v3, `theme.css` imposta sfondo e colore di `body` dai token (`--dbz-bg-base`, `--dbz-text-base`). I font restano a carico dell'app: `globals.css` imposta Inter su `html` e `font-heading` + grassetto sui titoli, mentre le app v4 caricano di solito i font con `next/font` o simili. Se servono, aggiungili nel CSS dell'app (es. `h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }`).
+
 **Da togliere dal CSS dell'app** (altrimenti sono copie che divergono): i blocchi `:root` e `.dark` con le variabili `--color-*` dei token DataBeez, il blocco `@theme inline` con gli alias, `@custom-variant dark` e i `@source` verso `@databeez-code/ui` (`dist/index.cjs`, `src/...`).
 
 **Variabili grezze:** nel CSS v4 i triplet RGB si chiamano `--dbz-*` (es. `--dbz-bg-base`, `--dbz-success-fg`), non `--color-*`, perché in v4 `--color-*` è il namespace del tema e `--color-success: rgb(var(--color-success))` sarebbe un ciclo. Se l'app usa direttamente `rgb(var(--color-bg-base))` nel proprio CSS, passi a `rgb(var(--dbz-bg-base))`.

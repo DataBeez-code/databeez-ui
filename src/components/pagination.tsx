@@ -32,6 +32,7 @@ const Pagination = React.forwardRef<HTMLElement, PaginationProps>(
         <span>{totalItems !== undefined ? `${formatNumber(totalItems)} ${totalItems === 1 ? "risultato" : "risultati"}` : null}</span>
         <div className="flex items-center gap-2">
           <Button
+            type="button"
             variant="outline"
             size="icon"
             aria-label="Pagina precedente"
@@ -44,6 +45,7 @@ const Pagination = React.forwardRef<HTMLElement, PaginationProps>(
             Pagina {formatNumber(current)} di {formatNumber(last)}
           </span>
           <Button
+            type="button"
             variant="outline"
             size="icon"
             aria-label="Pagina successiva"

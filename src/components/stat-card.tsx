@@ -75,7 +75,7 @@ function StatCard({
             <Delta {...(trend as StatCardDeltaTrend)} />
           </div>
         ))}
-      {hint && <div className="text-xs text-text-subtle mt-1">{hint}</div>}
+      {hint && <div className="text-xs text-text-muted mt-1">{hint}</div>}
     </div>
   )
 }

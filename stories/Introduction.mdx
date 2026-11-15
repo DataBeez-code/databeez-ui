@@ -25,7 +25,7 @@ Questa libreria raccoglie i componenti React, i token di design e le utility CSS
   </thead>
   <tbody>
     <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Framework</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>React 18</td></tr>
-    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Stili</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Tailwind CSS 3 + CSS Variables</td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Stili</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Tailwind CSS 3 (preset) e 4 (theme.css) + CSS Variables</td></tr>
     <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Varianti</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Class Variance Authority (CVA)</td></tr>
     <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Primitivi accessibili</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Radix UI (Dialog, Select, Tabs)</td></tr>
     <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Icone</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>Lucide React</td></tr>
@@ -45,17 +45,17 @@ Questa libreria raccoglie i componenti React, i token di design e le utility CSS
 
 - **Form** — `Input`, `InputWithIcon`, `SearchInput`, `Textarea`, `Select`, `Checkbox`, `CheckboxTree`, `Combobox`, `Switch`, `ChatInput`
 - **Pickers** — `DatePicker`, `DateRangePicker`, `TimePicker`, `ColorPicker`
-- **Display** — `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `DataSourceBadge`, `Spinner`, `DetailList` (`Section`, `InfoRow`)
+- **Display** — `Button`, `Badge`, `StatusBadge`, `MethodBadge`, `DataSourceBadge`, `Spinner`, `DetailList` (`Section`, `InfoRow`), `Delta`, `ProgressBar`, `Sparkline`
 - **Layout** — `Card`, `PageHeader`, `TabSwitch`, `Tabs`, `Stepper`, `SidePanel`, `FloatingPanel`, `ScrollArea`
 - **Feedback** — `Alert`, `EmptyState`, `Skeleton`
-- **Content** — `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard`, `MarkdownContent`, `MessageBubble`
-- **System** — `Table`, `Dialog`, `Popover`, `UserMenu`, `StatusIndicatorRow`
+- **Content** — `CodeBlock`, `CopyButton`, `FeatureCard`, `StatCard` (anche compatta, con trend e hint), `MarkdownContent`, `MessageBubble`
+- **System** — `Table` (con `TableSortHead` e colonne `numeric`), `Pagination`, `Dialog`, `Popover`, `UserMenu`, `StatusIndicatorRow`
 
 **🐝 Brand** — `DataBeezLogo` e i loghi delle app (`AppLogo`, `APP_LOGOS`).
 
 **🏢 Entities** — metadati dei soggetti di `src/entities`: tipi soggetto, sottotipi persona, tipi organizzazione, nodi ponte, con etichetta e icona.
 
-**🛠 Utilities** — formattatori (`formatEuro`, `formatNumber`, `formatDate`…).
+**🛠 Utilities** — formattatori (`formatEuro`, `formatNumber`, `formatPercent`, `formatDelta`, `formatDate`…) e helper di paginazione.
 
 ---
 
@@ -162,7 +162,7 @@ export default function RootLayout({ children }) {
 
 <table style={{ width: "100%", borderCollapse: "collapse" }}>
   <tbody>
-    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb", fontWeight: 600 }}>Versione</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}><code>0.1.0</code></td></tr>
+    <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb", fontWeight: 600 }}>Versione</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}>vedi <code>package.json</code> e i tag git</td></tr>
     <tr><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb", fontWeight: 600 }}>Repository</td><td style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #e5e7eb" }}><code>databeez-ui</code> (standalone, condiviso tra tutti i frontend)</td></tr>
     <tr><td style={{ padding: "0.5rem 1rem", fontWeight: 600 }}>Maintainer</td><td style={{ padding: "0.5rem 1rem" }}>Team DataBeez</td></tr>
   </tbody>

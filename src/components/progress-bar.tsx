@@ -10,7 +10,8 @@ const TONE_CLASS: Record<ProgressBarTone, string> = {
   warning: "bg-warning",
   error: "bg-error",
   info: "bg-info",
-  accent: "bg-accent",
+  // accent-fg e non accent: in beegraph `bg-accent` è ridefinito dal tema shadcn
+  accent: "bg-accent-fg",
 }
 
 export interface ProgressBarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
@@ -30,6 +31,9 @@ function ProgressBar({
   label,
   showValue = false,
   className,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-valuetext": ariaValueText,
   ...props
 }: ProgressBarProps) {
   const safeMax = max > 0 ? max : 100
@@ -51,7 +55,10 @@ function ProgressBar({
         aria-valuenow={clamped}
         aria-valuemin={0}
         aria-valuemax={safeMax}
-        aria-label={label}
+        aria-valuetext={ariaValueText}
+        // Il nome accessibile sta sull'elemento progressbar, non sul contenitore
+        aria-labelledby={ariaLabelledBy}
+        aria-label={ariaLabelledBy ? undefined : (ariaLabel ?? label ?? "Avanzamento")}
         className="h-2 overflow-hidden rounded-full bg-emphasis"
       >
         <div

@@ -113,6 +113,13 @@
     --dbz-risk-high-bg: 124 45 18;
     --dbz-risk-very-high-bg: 127 29 29;
   }
+
+  /* Stili base equivalenti a quelli di globals.css (preset v3). I font restano all'app,
+   * che di solito li carica con next/font o simili: vedi README. */
+  body {
+    background-color: rgb(var(--dbz-bg-base));
+    color: rgb(var(--dbz-text-base));
+  }
 }
 
 /* Mappa verso le utility (bg-surface, text-error-fg, bg-success/10, …). inline: le utility
