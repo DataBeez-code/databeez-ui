@@ -15,16 +15,21 @@ Aggiungi nel `package.json` del progetto consumatore:
 ```json
 {
   "dependencies": {
-    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.7.1"
+    "@databeez-code/ui": "github:DataBeez-code/databeez-ui#v0.10.0",
+    "lucide-react": ">=0.292.0"
   }
 }
 ```
 
 ```bash
-npm install
+npm install github:DataBeez-code/databeez-ui#v0.10.0
 ```
 
-Nessun token o `.npmrc` necessario — il repo è pubblico. Per aggiornare a una nuova versione, cambia il tag (`#v0.1.1`, ecc.).
+Nessun token o `.npmrc` necessario — il repo è pubblico. La libreria si distribuisce solo per tag git: non è pubblicata su un registro npm.
+
+`lucide-react` è una **peerDependency** (dalla v0.10.0): le icone della libreria usano la copia dell'app, così nel bundle ce n'è una sola. Basta una qualsiasi versione dalla 0.292 in poi.
+
+Per aggiornare a una nuova versione usa sempre `npm install github:DataBeez-code/databeez-ui#vX.Y.Z` esplicito: cambiare solo il tag in `package.json` non basta, perché `package-lock.json` tiene bloccato il commit precedente. Poi controlla la versione in `node_modules/@databeez-code/ui/package.json`.
 
 ### Sviluppo locale (due repo in parallelo)
 

@@ -33,6 +33,8 @@ export default defineConfig({
         "react",
         "react-dom",
         "react/jsx-runtime",
+        // Le icone le fornisce l'app (peerDependency): una sola copia di lucide nel bundle finale
+        "lucide-react",
       ],
       output: {
         globals: {

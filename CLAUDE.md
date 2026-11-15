@@ -20,9 +20,11 @@ Toolchain: Vite 7 (richiede Node ^20.19 o ≥ 22.12), Storybook 10.6. Ogni push 
 2. Aggiorna la versione in `package.json` (es. `0.4.4` → `0.4.5`)
 3. Esegui `npm run build`
 4. Committa e tagga: `git tag v0.4.5 && git push origin v0.4.5`
-5. Nei progetti consumatori, aggiorna il tag nel loro `package.json` ed esegui `npm install`
+5. Nei progetti consumatori esegui `npm install github:DataBeez-code/databeez-ui#vX.Y.Z` esplicito (cambiare solo il tag in `package.json` non aggiorna: il lock tiene il commit vecchio) e verifica `node_modules/@databeez-code/ui/package.json`
 
-> Non copiare mai file in `node_modules` dei progetti consumatori. Gestisci sempre la dipendenza tramite tag GitHub.
+> Non copiare mai file in `node_modules` dei progetti consumatori. Gestisci sempre la dipendenza tramite tag GitHub: la libreria non è pubblicata su nessun registro npm (il vecchio workflow per GitHub Packages è stato rimosso nella v0.10.0).
+
+`lucide-react` è una peerDependency esterna nella build (dalla v0.10.0): ogni icona importata in `src/` deve esistere in lucide-react 0.292, la versione più vecchia fra le app, che è anche quella in `devDependencies`.
 
 ## Struttura
 

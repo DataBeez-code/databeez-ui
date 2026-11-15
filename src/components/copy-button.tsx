@@ -27,11 +27,14 @@ function CopyButton({
     setTimeout(() => setCopied(false), resetDelay)
   }
 
+  // L'avviso «Copiato» passa da una regione live fuori dal pulsante: così arriva ai lettori di
+  // schermo anche quando l'app passa un proprio aria-label, che vince sul nome del pulsante.
   return (
+    <>
     <button
       type="button"
       onClick={handleCopy}
-      aria-label={copied ? "Copiato!" : `Copia${label ? ` ${label}` : ""}`}
+      aria-label={`Copia${label ? ` ${label}` : ""}`}
       className={cn(
         "inline-flex items-center gap-1.5 text-sm transition-colors",
         copied
@@ -50,6 +53,10 @@ function CopyButton({
         <span>{copied ? "Copiato!" : label}</span>
       )}
     </button>
+    <span role="status" aria-live="polite" className="sr-only">
+      {copied ? "Copiato" : ""}
+    </span>
+    </>
   )
 }
 
