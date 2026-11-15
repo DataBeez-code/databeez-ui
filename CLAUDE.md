@@ -120,9 +120,9 @@ Versioni nei `package.json` delle app (aggiornate a ogni adozione, TASK-888.13â€
 | BeeGraph | `beegraph` | `v0.7.1` |
 | BeeMap | `beemap` | `v0.5.0` |
 | Data Alveus | `data-alveus/frontend` | `v0.5.0` |
-| Bumblebee | `bumblebee/src/frontend` | `v0.4.5` |
+| Bumblebee | `bumblebee/src/frontend` | `v0.9.0` |
 | Swarm | `databeez-swarm/src/frontend` | `v0.4.5` |
-| Haive | `databeez-haive/frontend` | `v0.4.4` |
+| Haive | `databeez-haive/frontend` | `v0.9.0` |
 | BeeScout | `beescout` | `v0.9.0` (Tailwind 4, `theme.css`) |
 
 abbrevia-portal non usa la libreria e resta fuori dal design system: ha uno stile proprio.
