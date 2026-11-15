@@ -119,13 +119,13 @@ Versioni nei `package.json` delle app (aggiornate a ogni adozione, TASK-888.13�
 
 | App | Percorso | Versione in uso |
 |-----|----------|----------------|
-| BeeGraph | `beegraph` | `v0.9.0` (Tailwind 4, `theme.css`) |
-| BeeMap | `beemap` | `v0.9.0` (Tailwind 4, `theme.css`) |
-| Data Alveus | `data-alveus/frontend` | `v0.9.0` |
-| Bumblebee | `bumblebee/src/frontend` | `v0.9.0` |
-| Swarm | `databeez-swarm/src/frontend` | `v0.9.0` |
-| Haive | `databeez-haive/frontend` | `v0.9.0` |
-| BeeScout | `beescout` | `v0.9.0` (Tailwind 4, `theme.css`) |
+| BeeGraph | `beegraph` | `v0.10.0` (Tailwind 4, `theme.css`) |
+| BeeMap | `beemap` | `v0.10.0` (Tailwind 4, `theme.css`) |
+| Data Alveus | `data-alveus/frontend` | `v0.10.0` |
+| Bumblebee | `bumblebee/src/frontend` | `v0.10.0` |
+| Swarm | `databeez-swarm/src/frontend` | `v0.10.0` |
+| Haive | `databeez-haive/frontend` | `v0.10.0` |
+| BeeScout | `beescout` | `v0.10.0` (Tailwind 4, `theme.css`) |
 
 abbrevia-portal non usa la libreria e resta fuori dal design system: ha uno stile proprio.
-Piano di allineamento: epic TASK-888 nel backlog (milestone «PROD - DESIGN SYSTEM»).
+Piano di allineamento: epic TASK-888 e TASK-896 (v0.10.0) nel backlog, milestone «PROD - DESIGN SYSTEM».
